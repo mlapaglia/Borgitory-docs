@@ -26,10 +26,8 @@ intersphinx_mapping = {
     'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
     'fastapi': ('https://fastapi.tiangolo.com/', None),
     'borgbackup': ('https://borgbackup.readthedocs.io/en/stable/', None),
-    'rclone': ('https://rclone.org/', None),
 }
 intersphinx_disabled_domains = ['std']
-intersphinx_timeout = 10  # Timeout for fetching remote inventories
 
 templates_path = ['_templates']
 

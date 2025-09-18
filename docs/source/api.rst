@@ -46,7 +46,7 @@ Repository Management
 
 **List Repositories**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/repositories
 
@@ -54,7 +54,7 @@ Returns a list of all configured repositories.
 
 **Create Repository**
 
-.. code-block:: http
+.. code-block:: text
 
    POST /api/repositories
    Content-Type: application/json
@@ -67,13 +67,13 @@ Returns a list of all configured repositories.
 
 **Get Repository Details**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/repositories/{repository_id}
 
 **Update Repository**
 
-.. code-block:: http
+.. code-block:: text
 
    PUT /api/repositories/{repository_id}
    Content-Type: application/json
@@ -85,13 +85,13 @@ Returns a list of all configured repositories.
 
 **Delete Repository**
 
-.. code-block:: http
+.. code-block:: text
 
    DELETE /api/repositories/{repository_id}
 
 **Test Repository Connection**
 
-.. code-block:: http
+.. code-block:: text
 
    POST /api/repositories/{repository_id}/test
 
@@ -100,7 +100,7 @@ Backup Operations
 
 **Create Manual Backup**
 
-.. code-block:: http
+.. code-block:: text
 
    POST /api/backups/manual
    Content-Type: application/json
@@ -115,31 +115,31 @@ Backup Operations
 
 **List Archives**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/repositories/{repository_id}/archives
 
 **Get Archive Details**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/repositories/{repository_id}/archives/{archive_name}
 
 **Delete Archive**
 
-.. code-block:: http
+.. code-block:: text
 
    DELETE /api/repositories/{repository_id}/archives/{archive_name}
 
 **Browse Archive Contents**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/repositories/{repository_id}/archives/{archive_name}/browse?path=/optional/subpath
 
 **Download File from Archive**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/repositories/{repository_id}/archives/{archive_name}/download?path=/path/to/file
 
@@ -148,13 +148,13 @@ Schedule Management
 
 **List Schedules**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/schedules
 
 **Create Schedule**
 
-.. code-block:: http
+.. code-block:: text
 
    POST /api/schedules
    Content-Type: application/json
@@ -172,19 +172,19 @@ Schedule Management
 
 **Update Schedule**
 
-.. code-block:: http
+.. code-block:: text
 
    PUT /api/schedules/{schedule_id}
 
 **Delete Schedule**
 
-.. code-block:: http
+.. code-block:: text
 
    DELETE /api/schedules/{schedule_id}
 
 **Enable/Disable Schedule**
 
-.. code-block:: http
+.. code-block:: text
 
    POST /api/schedules/{schedule_id}/toggle
 
@@ -193,37 +193,37 @@ Job Management
 
 **List Jobs**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/jobs?status=running&limit=50&offset=0
 
 **Get Job Details**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/jobs/{job_id}
 
 **Cancel Job**
 
-.. code-block:: http
+.. code-block:: text
 
    POST /api/jobs/{job_id}/cancel
 
 **Retry Failed Job**
 
-.. code-block:: http
+.. code-block:: text
 
    POST /api/jobs/{job_id}/retry
 
 **Get Job Logs**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/jobs/{job_id}/logs
 
 **Stream Job Progress**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/jobs/{job_id}/stream
 
@@ -234,13 +234,13 @@ Cloud Sync
 
 **List Cloud Configurations**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/cloud-sync/configs
 
 **Create Cloud Configuration**
 
-.. code-block:: http
+.. code-block:: text
 
    POST /api/cloud-sync/configs
    Content-Type: application/json
@@ -259,13 +259,13 @@ Cloud Sync
 
 **Test Cloud Connection**
 
-.. code-block:: http
+.. code-block:: text
 
    POST /api/cloud-sync/configs/{config_id}/test
 
 **Manual Cloud Sync**
 
-.. code-block:: http
+.. code-block:: text
 
    POST /api/cloud-sync/sync
    Content-Type: application/json
@@ -277,7 +277,7 @@ Cloud Sync
 
 **List Supported Providers**
 
-.. code-block:: http
+.. code-block:: text
 
    GET /api/cloud-sync/providers
 

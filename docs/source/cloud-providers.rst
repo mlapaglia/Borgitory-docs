@@ -35,7 +35,7 @@ Step 1: Create the Storage Configuration Schema
 
 Create a new file: ``src/services/cloud_providers/storage/{provider_name}_storage.py``
 
-.. code-block:: python
+.. code-block:: text
 
    """
    {Provider Name} cloud storage implementation.
