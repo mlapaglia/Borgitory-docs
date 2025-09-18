@@ -1,34 +1,517 @@
-Usage
-=====
+.. meta::
+   :description lang=en:
+      Step-by-step usage guide for Borgitory covering repository setup, backup scheduling,
+      archive management, cloud sync, and monitoring operations.
 
-.. _installation:
+Usage Guide
+===========
 
-Installation
-------------
+This guide walks you through using Borgitory's key features step-by-step, from initial setup to advanced operations.
 
-To use Lumache, first install it using pip:
+Getting Started
+---------------
 
-.. code-block:: console
+First-Time Setup
+~~~~~~~~~~~~~~~~
 
-   (.venv) $ pip install lumache
+After installation, access Borgitory at http://localhost:8000:
 
-Creating recipes
+1. **Create Admin Account**
+   
+   * On first visit, you'll see the initial setup page
+   * Create your admin username and password
+   * Click "Create Account" to complete setup
+
+2. **Dashboard Overview**
+   
+   * The main dashboard shows repository status
+   * Navigation menu provides access to all features
+   * Quick actions are available in the toolbar
+
+Repository Management
+---------------------
+
+Adding Your First Repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. **Navigate to Repositories**
+   
+   * Click "Repositories" in the main navigation
+   * Click "Add Repository" button
+
+2. **Configure Repository**
+   
+   .. code-block:: text
+   
+      Name: My Backup Repo
+      Path: /mnt/repos/my-backup-repo
+      Passphrase: [secure-passphrase]
+   
+   * **Name**: Friendly identifier for the repository
+   * **Path**: Full path to repository location (must be under /mnt/ for Docker)
+   * **Passphrase**: Encryption password for the repository
+
+3. **Test Connection**
+   
+   * Click "Test Connection" to verify repository access
+   * Green checkmark indicates successful connection
+   * Red X indicates configuration issues
+
+4. **Save Repository**
+   
+   * Click "Save" to add the repository
+   * Repository appears in the main dashboard
+
+Managing Multiple Repositories
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Repository List View**
+   * View all configured repositories
+   * See connection status and last backup time
+   * Quick actions: Edit, Delete, Test Connection
+
+**Repository Details**
+   * Click repository name to view detailed information
+   * Repository statistics and health metrics
+   * Recent backup history and archive list
+
+Creating Backups
 ----------------
 
-To retrieve a list of random ingredients,
-you can use the ``lumache.get_random_ingredients()`` function:
+Manual Backup
+~~~~~~~~~~~~~
 
-.. autofunction:: lumache.get_random_ingredients
+1. **Start New Backup**
+   
+   * From dashboard, click "New Backup" button
+   * Or navigate to Backups → Manual Backup
 
-The ``kind`` parameter should be either ``"meat"``, ``"fish"``,
-or ``"veggies"``. Otherwise, :py:func:`lumache.get_random_ingredients`
-will raise an exception.
+2. **Configure Backup Settings**
+   
+   .. code-block:: text
+   
+      Repository: My Backup Repo
+      Source Path: /mnt/backup/sources/documents
+      Archive Name: documents-{now:%Y%m%d-%H%M%S}
+      Compression: lz4
+   
+   * **Repository**: Select target repository from dropdown
+   * **Source Path**: Directory to backup (must be under /mnt/ for Docker)
+   * **Archive Name**: Name template with timestamp support
+   * **Compression**: Choose compression algorithm (lz4, zlib, lzma, zstd)
 
-.. autoexception:: lumache.InvalidKindError
+3. **Advanced Options** (Optional)
+   
+   * **Exclude Patterns**: File patterns to exclude from backup
+   * **One File System**: Don't cross filesystem boundaries
+   * **Numeric Owner**: Store numeric user/group IDs
+   * **Checkpoint Interval**: Create checkpoints every N seconds
 
-For example:
+4. **Start Backup**
+   
+   * Click "Start Backup" to begin the process
+   * Real-time progress appears immediately
+   * Monitor transfer rates and file counts
 
->>> import lumache
->>> lumache.get_random_ingredients()
-['shells', 'gorgonzola', 'parsley']
+Monitoring Backup Progress
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Real-Time Progress Display**
+   * Live progress bar with percentage complete
+   * Current file being processed
+   * Transfer rate and estimated time remaining
+   * Total files processed and data transferred
+
+**Expandable Task Details**
+   * Click "Show Details" to view full command output
+   * See Borg's detailed progress information
+   * Monitor any warnings or errors
+   * View compression statistics
+
+**Job Completion**
+   * Success notification with backup summary
+   * Archive information and statistics
+   * Links to browse the new archive
+   * Option to start cloud sync if configured
+
+Scheduled Backups
+-----------------
+
+Creating Backup Schedules
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. **Navigate to Schedules**
+   
+   * Click "Schedules" in the main navigation
+   * Click "Add Schedule" button
+
+2. **Basic Schedule Configuration**
+   
+   .. code-block:: text
+   
+      Name: Daily Documents Backup
+      Repository: My Backup Repo
+      Source Path: /mnt/backup/sources/documents
+      Cron Expression: 0 2 * * *
+      Enabled: ✓
+   
+   * **Name**: Descriptive name for the schedule
+   * **Repository**: Target repository for backups
+   * **Source Path**: Directory to backup regularly
+   * **Cron Expression**: When to run (daily at 2 AM in this example)
+   * **Enabled**: Toggle to activate/deactivate schedule
+
+3. **Advanced Schedule Options**
+   
+   * **Compression**: Set compression algorithm
+   * **Archive Naming**: Template for archive names
+   * **Pruning Policy**: Attach retention policy
+   * **Notifications**: Configure success/failure alerts
+   * **Cloud Sync**: Enable automatic cloud synchronization
+
+Understanding Cron Expressions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Common cron patterns:
+
+.. code-block:: text
+
+   0 2 * * *     # Daily at 2:00 AM
+   0 2 * * 0     # Weekly on Sunday at 2:00 AM  
+   0 2 1 * *     # Monthly on 1st at 2:00 AM
+   0 */6 * * *   # Every 6 hours
+   30 1 * * 1-5  # Weekdays at 1:30 AM
+
+The interface shows human-readable descriptions of cron expressions.
+
+Managing Schedules
+~~~~~~~~~~~~~~~~~~
+
+**Schedule List**
+   * View all configured schedules
+   * See next run time and last execution
+   * Quick enable/disable toggles
+   * Edit and delete options
+
+**Schedule History**
+   * Click schedule name to view execution history
+   * See successful and failed runs
+   * Access logs and error details
+   * Performance metrics and trends
+
+Archive Pruning
+---------------
+
+Creating Pruning Policies
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. **Navigate to Cleanup**
+   
+   * Click "Cleanup" in the main navigation
+   * Click "Add Pruning Policy" button
+
+2. **Simple Retention Strategy**
+   
+   .. code-block:: text
+   
+      Name: Keep 30 Days
+      Strategy: Simple
+      Keep Days: 30
+      Show Details: ✓
+      Show Stats: ✓
+   
+   * **Keep Days**: Number of days to retain archives
+   * **Show Details**: Display detailed list of archives to prune
+   * **Show Stats**: Show space savings calculations
+
+3. **Advanced Retention Strategy**
+   
+   .. code-block:: text
+   
+      Name: Granular Retention
+      Strategy: Advanced
+      Keep Daily: 7
+      Keep Weekly: 4
+      Keep Monthly: 6
+      Keep Yearly: 2
+   
+   * **Keep Daily**: Recent daily archives to retain
+   * **Keep Weekly**: Weekly archives to retain
+   * **Keep Monthly**: Monthly archives to retain  
+   * **Keep Yearly**: Yearly archives to retain
+
+Executing Pruning Operations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Manual Pruning**
+   1. Select repository from dropdown
+   2. Choose pruning policy
+   3. Click "Preview Prune" to see what will be deleted
+   4. Review the prune list and space savings
+   5. Click "Execute Prune" to perform cleanup
+
+**Automated Pruning**
+   * Attach pruning policies to backup schedules
+   * Pruning runs automatically after successful backups
+   * Monitor pruning results in job history
+
+Archive Browsing
+----------------
+
+Exploring Archive Contents
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. **Access Archive Browser**
+   
+   * From dashboard, click "View Contents" next to any archive
+   * Or navigate to Archives → Browse Archives
+
+2. **Navigate Directory Structure**
+   
+   * Click folder names to navigate into directories
+   * Use breadcrumb navigation to go back
+   * See file sizes, modification dates, and permissions
+
+3. **File Operations**
+   
+   * **Download**: Click download button (⬇) next to files
+   * **View Details**: See file metadata and properties
+   * **Search**: Use search box to find specific files
+
+**FUSE Requirements**
+   Archive browsing requires FUSE support:
+   
+   * Docker: Run with ``--cap-add SYS_ADMIN --device /dev/fuse``
+   * Native: Ensure FUSE is installed and accessible
+   * Without FUSE: Archive browsing will be disabled
+
+Downloading Files from Archives
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Direct Downloads**
+   * Files stream directly from mounted archives
+   * No temporary storage required
+   * Works efficiently with large files
+   * Multiple downloads can run simultaneously
+
+**Download Process**
+   1. Navigate to desired file in archive browser
+   2. Click download button next to file
+   3. Browser starts download immediately
+   4. Monitor download progress in browser
+
+Cloud Synchronization
+---------------------
+
+Configuring Cloud Providers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. **Navigate to Cloud Sync**
+   
+   * Click "Cloud Sync" in the main navigation
+   * Click "Add Cloud Configuration" button
+
+2. **Select Provider**
+   
+   * Choose from supported providers (S3, Google Cloud, Azure, etc.)
+   * Provider-specific fields appear automatically
+
+3. **Configure S3 Example**
+   
+   .. code-block:: text
+   
+      Name: My S3 Backup
+      Provider: s3
+      Access Key ID: AKIAIOSFODNN7EXAMPLE
+      Secret Access Key: [hidden]
+      Bucket Name: my-backup-bucket
+      Region: us-east-1
+      Path Prefix: borgitory-backups/
+   
+   * **Access Keys**: AWS credentials for bucket access
+   * **Bucket Name**: S3 bucket for storing backups
+   * **Region**: AWS region for the bucket
+   * **Path Prefix**: Organization path within bucket
+
+4. **Test Connection**
+   
+   * Click "Test Connection" to verify configuration
+   * Green checkmark indicates successful connection
+   * Fix any configuration issues before saving
+
+Manual Cloud Sync
+~~~~~~~~~~~~~~~~~
+
+**Sync Repository to Cloud**
+   1. Navigate to Cloud Sync → Manual Sync
+   2. Select repository to sync
+   3. Choose cloud configuration
+   4. Click "Start Sync" to begin upload
+   5. Monitor real-time sync progress
+
+**Sync Progress Monitoring**
+   * Real-time transfer statistics
+   * Files uploaded and transfer rates
+   * Estimated time remaining
+   * Error reporting and retry logic
+
+Automated Cloud Sync
+~~~~~~~~~~~~~~~~~~~~
+
+**Schedule Integration**
+   * Enable cloud sync in backup schedules
+   * Automatic sync after successful backups
+   * Configure sync settings per schedule
+   * Monitor sync results in job history
+
+**Cloud Sync History**
+   * View all sync operations
+   * See successful and failed syncs
+   * Access detailed sync logs
+   * Monitor bandwidth usage over time
+
+Push Notifications
+------------------
+
+Configuring Pushover Notifications
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. **Get Pushover Credentials**
+   
+   * Sign up at https://pushover.net/
+   * Create application to get API token
+   * Note your user key from account settings
+
+2. **Configure in Borgitory**
+   
+   * Navigate to Notifications
+   * Click "Add Notification Configuration"
+   * Select "Pushover" as provider
+   
+   .. code-block:: text
+   
+      Name: My Phone Alerts
+      Provider: Pushover
+      User Key: [your-user-key]
+      API Token: [your-app-token]
+      Device: [optional-device-name]
+
+3. **Test Notifications**
+   
+   * Click "Test Notification" to send test message
+   * Verify notification appears on your device
+   * Adjust settings if needed
+
+Notification Settings
+~~~~~~~~~~~~~~~~~~~~~
+
+**Global Settings**
+   * Default notification preferences
+   * Quiet hours configuration
+   * Emergency escalation rules
+   * Message formatting options
+
+**Per-Schedule Settings**
+   * Attach notifications to specific schedules
+   * Configure success/failure triggers
+   * Custom message templates
+   * Priority levels and sounds
+
+Job Management
+--------------
+
+Monitoring Active Jobs
+~~~~~~~~~~~~~~~~~~~~~~
+
+**Jobs Dashboard**
+   * View all active and recent jobs
+   * Real-time status updates
+   * Progress indicators for running jobs
+   * Quick actions: Cancel, View Details, Retry
+
+**Job Details View**
+   * Expandable task details with full output
+   * Real-time log streaming
+   * Performance metrics and statistics
+   * Error reporting and diagnostics
+
+Job History
+~~~~~~~~~~~
+
+**Historical Job Data**
+   * Search and filter job history
+   * View job duration and performance trends
+   * Access detailed logs and error reports
+   * Export job data for analysis
+
+**Job Analysis**
+   * Success/failure rates over time
+   * Performance trending and optimization
+   * Resource usage patterns
+   * Bottleneck identification
+
+Troubleshooting Common Issues
+-----------------------------
+
+Quick Diagnostics
+~~~~~~~~~~~~~~~~~
+
+**Repository Issues**
+   * Verify repository path is correct and accessible
+   * Check passphrase is correct
+   * Ensure Borg is installed and in PATH
+   * Test repository with Borg CLI directly
+
+**Backup Failures**
+   * Check source path exists and is readable
+   * Verify sufficient disk space
+   * Review exclude patterns for conflicts
+   * Check file permissions and access rights
+
+**Cloud Sync Problems**
+   * Test cloud provider credentials
+   * Verify bucket/container exists
+   * Check network connectivity
+   * Review Rclone configuration
+
+For detailed troubleshooting information, see the :doc:`troubleshooting` guide.
+
+Best Practices
+--------------
+
+Repository Management
+~~~~~~~~~~~~~~~~~~~~~
+
+* Use descriptive repository names
+* Store repositories on reliable storage
+* Regular repository integrity checks
+* Keep passphrases secure and backed up
+* Monitor repository size growth
+
+Backup Strategy
+~~~~~~~~~~~~~~~
+
+* Test backup and restore procedures regularly
+* Use appropriate compression for your data
+* Implement 3-2-1 backup strategy (3 copies, 2 different media, 1 offsite)
+* Monitor backup success rates and performance
+* Document your backup procedures
+
+Security Considerations
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Use strong passphrases for repositories
+* Secure cloud provider credentials
+* Regular security updates and patches
+* Monitor access logs for suspicious activity
+* Implement proper network security
+
+Next Steps
+----------
+
+* Explore :doc:`how-to/index` guides for specific tasks
+* Configure :doc:`cloud-providers` for additional storage options
+* Review :doc:`troubleshooting` for common issues
+* Check the :doc:`api` documentation for automation
+* Join the community on GitHub for support and updates
 
