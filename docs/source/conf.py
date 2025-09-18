@@ -29,6 +29,7 @@ intersphinx_mapping = {
     'rclone': ('https://rclone.org/', None),
 }
 intersphinx_disabled_domains = ['std']
+intersphinx_timeout = 10  # Timeout for fetching remote inventories
 
 templates_path = ['_templates']
 
