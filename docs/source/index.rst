@@ -6,29 +6,41 @@
 Welcome to Borgitory's Documentation!
 ======================================
 
-.. image:: https://img.shields.io/github/actions/workflow/status/mlapaglia/borgitory/build.yml?logo=github
-   :target: https://github.com/mlapaglia/Borgitory/actions/workflows/release.yml
-   :alt: Build Status
+.. raw:: html
 
-.. image:: https://img.shields.io/docker/pulls/mlapaglia/borgitory?logo=docker&label=pulls
-   :target: https://hub.docker.com/r/mlapaglia/borgitory
-   :alt: Docker Pulls
+   <a href="https://github.com/mlapaglia/Borgitory/actions/workflows/release.yml">
+      <img src="https://img.shields.io/github/actions/workflow/status/mlapaglia/borgitory/build.yml?logo=github" alt="Build Status">
+   </a>
 
-.. image:: https://img.shields.io/pypi/dm/borgitory?style=flat&logo=pypi&logoColor=%23ffd343&label=downloads&labelColor=%23ffd343
-   :target: https://pypi.org/project/borgitory/
-   :alt: PyPI Downloads
+.. raw:: html
 
-.. image:: https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmlapaglia%2FBorgitory%2Frefs%2Fheads%2Fmain%2FDockerfile&search=ARG%20BORGBACKUP_VERSION%3D(.%2B)&replace=%241&logo=borgbackup&label=BorgBackup
-   :target: https://borgbackup.readthedocs.io/
-   :alt: PyPI Downloads
+   <a href="https://hub.docker.com/r/mlapaglia/borgitory">
+      <img src="https://img.shields.io/docker/pulls/mlapaglia/borgitory?logo=docker&label=pulls" alt="Docker Pulls">
+   </a>
 
-.. image:: https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmlapaglia%2FBorgitory%2Frefs%2Fheads%2Fmain%2FDockerfile&search=ARG%20RCLONE_VERSION%3D(.%2B)&replace=%241&logo=rclone&label=Rclone
-   :target: https://rclone.org/
-   :alt: PyPI Downloads
+.. raw:: html
 
-.. image:: https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmlapaglia%2FBorgitory%2Frefs%2Fheads%2Fmain%2FDockerfile&search=ARG%20FUSE3_VERSION%3D(.%2B)&replace=%241&logo=python&label=pfuse3
-   :target: https://github.com/libfuse/libfuse
-   :alt: PyPI Downloads
+   <a href="https://pypi.org/project/borgitory/">
+      <img src="https://img.shields.io/pypi/dm/borgitory?style=flat&logo=pypi&logoColor=%23ffd343&label=downloads&labelColor=%23ffd343" alt="PyPI Downloads">
+   </a>
+
+.. raw:: html
+
+   <a href="https://borgbackup.readthedocs.io/">
+      <img src="https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmlapaglia%2FBorgitory%2Frefs%2Fheads%2Fmain%2FDockerfile&search=ARG%20BORGBACKUP_VERSION%3D(.%2B)&replace=%241&logo=borgbackup&label=BorgBackup" alt="BorgBackup Version">
+   </a>
+
+.. raw:: html
+
+   <a href="https://rclone.org/">
+      <img src="https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmlapaglia%2FBorgitory%2Frefs%2Fheads%2Fmain%2FDockerfile&search=ARG%20RCLONE_VERSION%3D(.%2B)&replace=%241&logo=rclone&label=Rclone" alt="Rclone Version">
+   </a>
+
+.. raw:: html
+
+   <a href="https://github.com/libfuse/libfuse">
+      <img src="https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmlapaglia%2FBorgitory%2Frefs%2Fheads%2Fmain%2FDockerfile&search=ARG%20FUSE3_VERSION%3D(.%2B)&replace=%241&logo=python&label=pfuse3" alt="FUSE3 Version">
+   </a>
 
 **Borgitory** is a comprehensive web-based management interface for `BorgBackup <https://borgbackup.readthedocs.io/>`_ repositories 
 with real-time monitoring, automated scheduling, and cloud synchronization capabilities.
