@@ -1,3 +1,8 @@
+.. meta::
+   :description lang=en:
+      Comprehensive overview of Borgitory features including repository management, automated backups,
+      cloud sync, archive browsing, and web-based monitoring for BorgBackup.
+
 Features Overview
 =================
 
@@ -41,7 +46,7 @@ Manual Backup Operations
    * Server-Sent Events for real-time updates
 
 Archive Management
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 **Archive Browser**
    * Interactive directory-based archive exploration
@@ -64,7 +69,7 @@ Archive Management
    * Archive comparison and diff capabilities
 
 Automated Operations
--------------------
+--------------------
 
 Scheduled Backups
 ~~~~~~~~~~~~~~~~~
@@ -84,7 +89,7 @@ Scheduled Backups
    * Schedule conflict detection and management
 
 Archive Pruning
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 **Retention Policies**
    * **Simple Strategy**: Keep archives within X days
@@ -112,7 +117,7 @@ Cloud Synchronization
 ---------------------
 
 Multi-Provider Support
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 Borgitory supports multiple cloud storage providers through Rclone integration:
 
@@ -133,7 +138,7 @@ Borgitory supports multiple cloud storage providers through Rclone integration:
    * Provider-specific optimization settings
 
 Cloud Sync Operations
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 **Automated Synchronization**
    * Post-backup automatic sync to cloud storage
@@ -157,7 +162,7 @@ Cloud Sync Operations
    * Success/failure notifications
 
 Job Management System
---------------------
+---------------------
 
 Real-Time Job Monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -184,10 +189,10 @@ Real-Time Job Monitoring
    * Task cancellation and cleanup
 
 Notifications
-------------
+-------------
 
 Push Notifications
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 **Pushover Integration**
    * Job completion notifications
@@ -207,7 +212,7 @@ User Interface
 --------------
 
 Modern Web Interface
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 **Technology Stack**
    * **HTMX**: Dynamic HTML updates without JavaScript frameworks
@@ -230,10 +235,10 @@ Modern Web Interface
    * Customizable dashboard layouts
 
 Security Features
-----------------
+-----------------
 
 Authentication & Authorization
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **User Management**
    * Secure username/password authentication
@@ -257,10 +262,10 @@ Authentication & Authorization
    * Rate limiting and abuse prevention
 
 API & Integration
-----------------
+-----------------
 
 REST API
-~~~~~~~
+~~~~~~~~
 
 **Comprehensive API**
    * Full REST API for all functionality
@@ -287,7 +292,7 @@ Monitoring & Observability
 --------------------------
 
 System Monitoring
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 **Health Checks**
    * Application health monitoring
@@ -311,7 +316,7 @@ System Monitoring
    * Performance trend analysis
 
 Architecture Features
---------------------
+---------------------
 
 Modern Python Stack
 ~~~~~~~~~~~~~~~~~~~
@@ -338,10 +343,10 @@ Modern Python Stack
    * Container orchestration ready
 
 Development & Deployment
------------------------
+------------------------
 
 Deployment Options
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 **Container Support**
    * Official Docker images on Docker Hub
@@ -365,7 +370,7 @@ Deployment Options
    * GitHub Actions CI/CD pipeline
 
 Extensibility
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 **Plugin System (Planned)**
    * Custom provider plugins
@@ -382,7 +387,7 @@ Extensibility
    * Template-based configuration generation
 
 Coming Soon
-----------
+-----------
 
 **Planned Features**
    * Multi-user support with role-based access control

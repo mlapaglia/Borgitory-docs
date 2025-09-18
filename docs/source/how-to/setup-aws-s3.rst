@@ -78,7 +78,7 @@ Step 2: Create S3 Bucket
 ------------------------
 
 Bucket Configuration
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 1. **Create Bucket**
    
@@ -99,7 +99,7 @@ Bucket Configuration
    * Set up automatic deletion of old versions
 
 Example Lifecycle Policy
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 To automatically move backups to cheaper storage after 30 days:
 
@@ -132,7 +132,7 @@ Step 3: Configure Borgitory
 ---------------------------
 
 Add S3 Configuration
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 1. **Navigate to Cloud Sync**
    
@@ -179,7 +179,7 @@ Step 4: Test Cloud Sync
 -----------------------
 
 Manual Sync Test
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 1. **Prepare Test Repository**
    
@@ -207,7 +207,7 @@ Manual Sync Test
    * Check file sizes match expectations
 
 Automated Sync Setup
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 1. **Configure Schedule**
    
@@ -224,10 +224,10 @@ Automated Sync Setup
    * Check job history for any issues
 
 Step 5: Optimization and Monitoring
-----------------------------------
+-----------------------------------
 
 Performance Optimization
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Transfer Speed**
    * Choose S3 region closest to your server
@@ -245,7 +245,7 @@ Performance Optimization
    * Test different settings with your data
 
 Monitoring and Alerts
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 **CloudWatch Metrics**
    * Set up CloudWatch alarms for unusual S3 activity
@@ -263,10 +263,10 @@ Monitoring and Alerts
    * Review storage class distribution regularly
 
 Troubleshooting Common Issues
-----------------------------
+-----------------------------
 
 Connection Failures
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **Invalid Credentials**
    
@@ -299,7 +299,7 @@ Connection Failures
    * Consider using S3 VPC endpoints if running in AWS
 
 Sync Failures
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 **Insufficient Permissions**
    
@@ -320,10 +320,10 @@ Sync Failures
    * Monitor transfer progress and retry failed uploads
 
 Security Best Practices
-----------------------
+-----------------------
 
 Credential Management
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 * Use IAM roles instead of access keys when running on EC2
 * Rotate access keys regularly
@@ -331,7 +331,7 @@ Credential Management
 * Use AWS Secrets Manager for credential storage in production
 
 Bucket Security
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 * Enable bucket versioning for additional protection
 * Use bucket notifications to monitor access
@@ -339,7 +339,7 @@ Bucket Security
 * Consider using S3 Object Lock for compliance requirements
 
 Network Security
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 * Use VPC endpoints for private S3 access from EC2
 * Enable S3 access logging for security monitoring

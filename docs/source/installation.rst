@@ -1,3 +1,8 @@
+.. meta::
+   :description lang=en:
+      Complete installation guide for Borgitory including Docker, PyPI, and source installation methods.
+      Learn how to set up BorgBackup web interface with step-by-step instructions.
+
 Installation Guide
 ==================
 

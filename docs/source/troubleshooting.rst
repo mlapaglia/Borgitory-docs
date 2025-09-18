@@ -1,5 +1,5 @@
 Troubleshooting Guide
-====================
+=====================
 
 This guide covers common issues, error messages, and solutions when using Borgitory.
 
@@ -7,7 +7,7 @@ Quick Diagnostics
 -----------------
 
 System Health Check
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 Before troubleshooting specific issues, verify your system meets the basic requirements:
 
@@ -64,10 +64,10 @@ Before troubleshooting specific issues, verify your system meets the basic requi
    ls -la /dev/fuse
 
 Installation Issues
-------------------
+-------------------
 
 PyPI Installation Problems
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Python Version Compatibility**
 
@@ -136,7 +136,7 @@ PyPI Installation Problems
    pip install --user borgitory
 
 Docker Installation Problems
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **FUSE Mount Failures**
 
@@ -185,10 +185,10 @@ Docker Installation Problems
    - /home/user/documents:/mnt/backup/documents:ro
 
 Repository Issues
-----------------
+-----------------
 
 Repository Connection Failures
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Invalid Repository Path**
 
@@ -264,7 +264,7 @@ Backup Operation Failures
 -------------------------
 
 Backup Job Failures
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **Insufficient Disk Space**
 
@@ -339,10 +339,10 @@ Backup Job Failures
    node_modules/
 
 Cloud Sync Issues
-----------------
+-----------------
 
 Connection Failures
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **Invalid Credentials**
 
@@ -407,10 +407,10 @@ Connection Failures
 * Review bucket policies and access controls
 
 Performance Issues
------------------
+------------------
 
 Slow Backup Operations
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 **Disk I/O Bottlenecks**
 
@@ -454,7 +454,7 @@ Slow Backup Operations
 * Implement incremental backup strategies
 
 High Memory Usage
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 **Large Repository Memory Consumption**
 
@@ -476,10 +476,10 @@ High Memory Usage
 * For Docker, increase memory limits
 
 Database Issues
---------------
+---------------
 
 SQLite Database Problems
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Database Corruption**
 
@@ -524,10 +524,10 @@ SQLite Database Problems
 * Restart application
 
 Archive Browser Issues
----------------------
+----------------------
 
 FUSE Mount Problems
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **Archive Browser Disabled**
 
@@ -564,10 +564,10 @@ FUSE Mount Problems
 * Verify ``user_allow_other`` option is enabled
 
 Web Interface Issues
--------------------
+--------------------
 
 Login Problems
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 **Forgot Password**
 
@@ -595,7 +595,7 @@ Login Problems
 * Restart Borgitory service
 
 Connection Refused
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 .. code-block:: text
 
@@ -623,10 +623,10 @@ Connection Refused
 * Check if another service is using the port
 
 Getting Help
------------
+------------
 
 Collecting Debug Information
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When reporting issues, include:
 
@@ -667,7 +667,7 @@ When reporting issues, include:
 * Error messages with full stack traces
 
 Support Channels
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 * **GitHub Issues**: https://github.com/mlapaglia/Borgitory/issues
 * **GitHub Discussions**: https://github.com/mlapaglia/Borgitory/discussions
@@ -682,10 +682,10 @@ When reporting issues:
 5. Mention any recent changes to your setup
 
 Common Error Codes
------------------
+------------------
 
 HTTP Error Codes
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 * **400 Bad Request**: Invalid input data or configuration
 * **401 Unauthorized**: Authentication required or failed
@@ -694,7 +694,7 @@ HTTP Error Codes
 * **500 Internal Server Error**: Application error (check logs)
 
 Borg Exit Codes
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 * **0**: Success
 * **1**: Warning (operation succeeded with warnings)
@@ -704,7 +704,7 @@ Borg Exit Codes
 * **5**: Repository already exists
 
 Rclone Exit Codes
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 * **0**: Success
 * **1**: Syntax or usage error
@@ -718,10 +718,10 @@ Rclone Exit Codes
 * **9**: Operation successful, but no files transferred
 
 Preventive Measures
-------------------
+-------------------
 
 Regular Maintenance
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 * **Monitor disk space** regularly
 * **Test restore procedures** periodically
@@ -731,7 +731,7 @@ Regular Maintenance
 * **Verify repository integrity** monthly
 
 Best Practices
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 * Use strong, unique passphrases
 * Implement 3-2-1 backup strategy

@@ -15,10 +15,10 @@ Borgitory's Docker deployment provides:
 * Scalable configuration
 
 Production Requirements
-----------------------
+-----------------------
 
 System Requirements
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **Minimum Requirements:**
    * 2 CPU cores
@@ -38,7 +38,7 @@ System Requirements
    * Volume mounting for persistent storage
 
 Network Requirements
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 * **Port 8000**: Web interface access
 * **Outbound HTTPS (443)**: Cloud sync operations
@@ -49,7 +49,7 @@ Production Docker Compose
 -------------------------
 
 Complete Production Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Create ``docker-compose.prod.yml``:
 
@@ -131,7 +131,7 @@ Create ``docker-compose.prod.yml``:
        name: borgitory-network
 
 Advanced Configuration Options
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **With Traefik Reverse Proxy:**
 
@@ -170,10 +170,10 @@ Advanced Configuration Options
        external: true
 
 Storage Configuration
---------------------
+---------------------
 
 Volume Mapping Strategy
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 **Application Data Volume:**
 
@@ -215,7 +215,7 @@ Contains:
 * Consider redundancy and backup strategies
 
 Directory Structure Example
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: text
 
@@ -236,10 +236,10 @@ Directory Structure Example
        └── system-repo/
 
 Security Configuration
----------------------
+----------------------
 
 User and Permissions
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 **Run as Non-Root User:**
 
@@ -262,7 +262,7 @@ User and Permissions
    chmod 600 ./data/secret_key
 
 Network Security
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 **Firewall Configuration:**
 
@@ -298,10 +298,10 @@ Use Traefik, Nginx, or Apache for SSL termination:
    }
 
 Backup and Recovery
-------------------
+-------------------
 
 Application Data Backup
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 **Database Backup:**
 
@@ -337,7 +337,7 @@ Application Data Backup
    0 2 * * * /srv/borgitory/backup-borgitory.sh
 
 Recovery Procedures
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **Application Recovery:**
 
@@ -369,10 +369,10 @@ Recovery Procedures
    docker-compose -f docker-compose.prod.yml up -d
 
 Monitoring and Maintenance
--------------------------
+--------------------------
 
 Health Monitoring
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 **Docker Health Checks:**
 
@@ -401,7 +401,7 @@ Health Monitoring
    fi
 
 Log Management
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 **Log Rotation:**
 
@@ -424,7 +424,7 @@ Log Management
        tag: "borgitory"
 
 Updates and Maintenance
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 **Update Procedure:**
 
@@ -457,10 +457,10 @@ Updates and Maintenance
    0 3 * * 0 /srv/borgitory/update-borgitory.sh
 
 Performance Optimization
------------------------
+------------------------
 
 Resource Allocation
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **CPU Optimization:**
 
@@ -485,7 +485,7 @@ Resource Allocation
          memory: 2G
 
 Storage Performance
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **SSD for Application Data:**
    * Use SSD for ``/app/data`` volume
@@ -498,10 +498,10 @@ Storage Performance
    * Consider NFS vs. CIFS performance
 
 Troubleshooting
---------------
+---------------
 
 Common Issues
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 **FUSE Mount Failures:**
 
@@ -542,7 +542,7 @@ Common Issues
    docker-compose -f docker-compose.prod.yml config
 
 Performance Issues
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 **Slow Backups:**
    * Check disk I/O: ``iostat -x 1``

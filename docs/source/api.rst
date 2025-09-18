@@ -1,3 +1,8 @@
+.. meta::
+   :description lang=en:
+      Complete REST API reference for Borgitory including authentication, repository management,
+      backup operations, scheduling, and cloud sync endpoints with examples.
+
 API Reference
 =============
 
@@ -34,10 +39,10 @@ All API endpoints are prefixed with the base URL of your Borgitory instance:
    http://localhost:8000/api/
 
 API Endpoints Overview
----------------------
+----------------------
 
 Repository Management
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 **List Repositories**
 
@@ -91,7 +96,7 @@ Returns a list of all configured repositories.
    POST /api/repositories/{repository_id}/test
 
 Backup Operations
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 **Create Manual Backup**
 
@@ -139,7 +144,7 @@ Backup Operations
    GET /api/repositories/{repository_id}/archives/{archive_name}/download?path=/path/to/file
 
 Schedule Management
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **List Schedules**
 
@@ -184,7 +189,7 @@ Schedule Management
    POST /api/schedules/{schedule_id}/toggle
 
 Job Management
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 **List Jobs**
 
@@ -225,7 +230,7 @@ Job Management
 Returns Server-Sent Events for real-time job progress updates.
 
 Cloud Sync
-~~~~~~~~~
+~~~~~~~~~~
 
 **List Cloud Configurations**
 
@@ -277,10 +282,10 @@ Cloud Sync
    GET /api/cloud-sync/providers
 
 Response Formats
----------------
+----------------
 
 Standard Response Structure
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 All API responses follow a consistent structure:
 
@@ -312,7 +317,7 @@ All API responses follow a consistent structure:
    }
 
 HTTP Status Codes
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 * **200 OK**: Successful GET, PUT requests
 * **201 Created**: Successful POST requests that create resources
@@ -326,10 +331,10 @@ HTTP Status Codes
 * **500 Internal Server Error**: Server-side errors
 
 Example Usage
-------------
+-------------
 
 Python Example
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -382,7 +387,7 @@ Python Example
        job = start_backup(repo["id"])
 
 JavaScript Example
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 .. code-block:: javascript
 
@@ -464,7 +469,7 @@ JavaScript Example
    }
 
 Future API Enhancements
-----------------------
+-----------------------
 
 Planned improvements for future releases:
 

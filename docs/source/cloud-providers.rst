@@ -16,7 +16,7 @@ The cloud sync system is designed with a modular architecture that makes adding 
 Borgitory uses `rclone <https://rclone.org/>`_ for syncing. Borgitory can theoretically support any destination that rclone does.
 
 Registry Pattern
----------------
+----------------
 
 Borgitory uses a **registry pattern** for cloud providers, which means:
 
@@ -28,10 +28,10 @@ Borgitory uses a **registry pattern** for cloud providers, which means:
 This eliminates the need to manually update multiple files when adding a provider!
 
 Step-by-Step Implementation Guide
---------------------------------
+---------------------------------
 
 Step 1: Create the Storage Configuration Schema
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Create a new file: ``src/services/cloud_providers/storage/{provider_name}_storage.py``
 
@@ -237,7 +237,7 @@ Edit ``src/services/cloud_providers/storage/__init__.py``:
    ]
 
 Step 3: Create Frontend Template
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Create ``src/borgitory/templates/partials/cloud_sync/providers/{provider_name}_fields.html``:
 
@@ -268,7 +268,7 @@ Create ``src/borgitory/templates/partials/cloud_sync/providers/{provider_name}_f
    </div>
 
 Step 4: Template Integration (Automatic)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Good news!** With the current implementation, templates are automatically discovered by checking if the template file exists on the filesystem. You don't need to manually update any API context variables.
 
@@ -300,7 +300,7 @@ Thanks to the registry pattern, many things are automated:
 - Update this documentation with provider-specific details
 
 Step 5: Implement Rclone Integration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Add methods to ``src/services/rclone_service.py``:
 
@@ -398,7 +398,7 @@ Add methods to ``src/services/rclone_service.py``:
        )
 
 Step 6: Create Tests
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 Create ``tests/cloud_providers/test_{provider_name}_storage.py``:
 
@@ -496,10 +496,10 @@ Create ``tests/cloud_providers/test_{provider_name}_storage.py``:
            assert "***" in info.details["api_key"]  # Should be masked
 
 Testing Your Implementation
---------------------------
+---------------------------
 
 Configuration Validation Tests
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -515,28 +515,28 @@ Configuration Validation Tests
    "
 
 Unit Tests
-~~~~~~~~~
+~~~~~~~~~~
 
 .. code-block:: bash
 
    python -m pytest tests/cloud_providers/test_{provider_name}_storage.py -v
 
 Integration Tests
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
    python -m pytest tests/cloud_sync/ -v
 
 Full Cloud Provider Test Suite
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
    python -m pytest tests/cloud_providers/ -v
 
 Registry Integration Test
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Verify your provider is automatically registered:
 
@@ -559,7 +559,7 @@ Verify your provider is automatically registered:
    "
 
 Frontend Testing
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 - Start the application
 - Navigate to Cloud Sync settings
@@ -578,36 +578,36 @@ Common Pitfalls
 6. **Testing**: Create both unit tests for the storage classes and integration tests for the full flow
 
 Provider-Specific Considerations
--------------------------------
+--------------------------------
 
 For Object Storage Providers (S3-like)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Follow S3 patterns for bucket naming, regions, storage classes
 - Consider implementing storage class options if supported
 - Add endpoint URL validation for custom S3-compatible services
 
 For File Transfer Providers (SFTP-like)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Focus on connection authentication (keys, passwords, certificates)
 - Validate host/port combinations
 - Consider connection timeout and retry logic
 
 For API-based Providers
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 - Implement proper API key validation and formatting
 - Add rate limiting considerations
 - Handle API versioning if applicable
 
 Enhanced Rclone Integration Pattern
-----------------------------------
+-----------------------------------
 
 The system includes an enhanced rclone integration pattern that automates parameter mapping and provides generic dispatcher methods.
 
 RcloneMethodMapping
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 Each provider can define how its configuration maps to rclone method parameters:
 
@@ -629,7 +629,7 @@ Each provider can define how its configuration maps to rclone method parameters:
    )
 
 Two Ways to Define Rclone Mapping
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Option 1: In Registration Decorator**
 
@@ -664,7 +664,7 @@ Two Ways to Define Rclone Mapping
        storage_class = MyProviderStorage
 
 Final Steps
-----------
+-----------
 
 1. **That's it!** 🎉 With the registry pattern, your provider is automatically:
    
@@ -679,7 +679,7 @@ Final Steps
 5. Update any deployment documentation if new dependencies are required
 
 Registry Pattern Benefits
-------------------------
+-------------------------
 
 The registry pattern provides these key advantages:
 
@@ -738,7 +738,7 @@ The registry pattern provides these key advantages:
 Much simpler! 🎉
 
 Current Limitations
-------------------
+-------------------
 
 While the registry pattern significantly simplifies adding new providers, some manual steps remain:
 

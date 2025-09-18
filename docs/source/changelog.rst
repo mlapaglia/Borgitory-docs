@@ -107,7 +107,7 @@ Features
   - Volume mounting strategies
 
 Technical Details
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 * **Backend**: FastAPI, SQLAlchemy, APScheduler
 * **Frontend**: HTMX, Alpine.js, Tailwind CSS, Jinja2
 * **Database**: SQLite with Alembic migrations
@@ -137,7 +137,7 @@ Known Issues
 * Session-only API authentication (API keys planned)
 
 Migration Notes
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 This is the initial stable release. Future versions will include migration guides for any breaking changes.
 
 Development
@@ -150,7 +150,7 @@ Development
 * Docker multi-stage builds
 
 Documentation
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 * Complete user documentation
 * API reference with examples
 * Installation and deployment guides

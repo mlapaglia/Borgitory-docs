@@ -1,3 +1,8 @@
+.. meta::
+   :description lang=en:
+      Borgitory is a comprehensive web-based management interface for BorgBackup repositories 
+      with real-time monitoring, automated scheduling, and cloud synchronization capabilities.
+
 Welcome to Borgitory's Documentation!
 ======================================
 
@@ -71,7 +76,6 @@ Contents
    cloud-providers
    api
    architecture
-   development
 
 .. toctree::
    :maxdepth: 1

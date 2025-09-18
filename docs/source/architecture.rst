@@ -1,5 +1,5 @@
 Architecture Overview
-====================
+=====================
 
 This document provides a technical overview of Borgitory's architecture, design principles, and implementation details.
 
@@ -7,7 +7,7 @@ System Architecture
 -------------------
 
 High-Level Overview
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 Borgitory follows a modern web application architecture with clear separation of concerns:
 
@@ -49,10 +49,10 @@ Borgitory follows a modern web application architecture with clear separation of
                         └─────────────────┘
 
 Backend Architecture
-------------------
+--------------------
 
 FastAPI Application
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **Core Components:**
 
@@ -78,7 +78,7 @@ FastAPI Application
   - Authentication dependencies
 
 Service Layer Architecture
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Service Pattern Implementation:**
 
@@ -109,10 +109,10 @@ Service Layer Architecture
 * **RecoveryService** - Archive browsing and file recovery
 
 Database Layer
--------------
+--------------
 
 SQLAlchemy ORM
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 **Model Architecture:**
 
@@ -152,10 +152,10 @@ SQLAlchemy ORM
 * **Encrypted sensitive data** storage
 
 Frontend Architecture
--------------------
+---------------------
 
 Modern Web Stack
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 **Technology Choices:**
 
@@ -173,7 +173,7 @@ Modern Web Stack
 5. **Developer Experience** - Familiar template-based approach
 
 Template Architecture
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 **Template Hierarchy:**
 
@@ -207,10 +207,10 @@ Template Architecture
 * **Accessibility** features built-in
 
 Job Management System
---------------------
+---------------------
 
 Background Job Processing
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Job Architecture:**
 
@@ -264,7 +264,7 @@ Background Job Processing
            )
 
 Real-Time Updates
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 **Server-Sent Events (SSE):**
 
@@ -294,10 +294,10 @@ Real-Time Updates
        return EventSourceResponse(event_generator())
 
 Cloud Provider System
---------------------
+---------------------
 
 Registry Pattern
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 **Dynamic Provider Registration:**
 
@@ -357,10 +357,10 @@ Registry Pattern
 * **Metadata-driven** - UI behavior based on capabilities
 
 Security Architecture
--------------------
+---------------------
 
 Authentication & Authorization
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Current Implementation:**
 
@@ -395,7 +395,7 @@ Authentication & Authorization
 * **Rate limiting** and abuse prevention
 
 Data Protection
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 **Sensitive Data Handling:**
 
@@ -413,10 +413,10 @@ Data Protection
 * **No plaintext secrets** in configuration files
 
 Performance Considerations
--------------------------
+--------------------------
 
 Scalability Design
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 **Current Optimizations:**
 
@@ -448,7 +448,7 @@ Scalability Design
 * **Caching layers** for frequently accessed data
 
 Monitoring & Observability
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Built-in Monitoring:**
 
@@ -475,10 +475,10 @@ Monitoring & Observability
    )
 
 Deployment Architecture
-----------------------
+-----------------------
 
 Container Strategy
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 **Docker Benefits:**
 
@@ -520,10 +520,10 @@ Container Strategy
 * **Temporary storage** - Scratch space for operations
 
 Development Workflow
--------------------
+--------------------
 
 Code Organization
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 **Project Structure:**
 
@@ -581,10 +581,10 @@ Code Organization
      run: bandit -r src/
 
 Future Architecture Plans
-------------------------
+-------------------------
 
 Planned Improvements
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 **Database Enhancements:**
 

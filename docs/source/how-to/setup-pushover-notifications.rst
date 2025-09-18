@@ -26,7 +26,7 @@ Step 1: Create Pushover Account
 -------------------------------
 
 Sign Up for Pushover
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 1. **Visit Pushover Website**
    
@@ -54,7 +54,7 @@ Step 2: Create Pushover Application
 -----------------------------------
 
 Register Application
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 1. **Create New Application**
    
@@ -85,7 +85,7 @@ Step 3: Configure Borgitory
 ---------------------------
 
 Add Pushover Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Navigate to Notifications**
    
@@ -134,7 +134,7 @@ Step 4: Configure Notification Triggers
 ---------------------------------------
 
 Global Notification Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Set Default Preferences**
    
@@ -150,7 +150,7 @@ Global Notification Settings
         Emergency Escalation: Disabled
 
 Per-Schedule Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Edit Backup Schedules**
    
@@ -187,7 +187,7 @@ Step 5: Advanced Configuration
 ------------------------------
 
 Priority Levels
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 Pushover supports different priority levels:
 
@@ -206,7 +206,7 @@ Pushover supports different priority levels:
    Failure Notifications: Priority 2 (Emergency)
 
 Device-Specific Notifications
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To send notifications to specific devices:
 
@@ -223,7 +223,7 @@ To send notifications to specific devices:
    * Use comma-separated list for multiple devices: ``iPhone,Desktop``
 
 Custom Sounds
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 Pushover supports custom notification sounds:
 
@@ -246,7 +246,7 @@ Pushover supports custom notification sounds:
    Failure Sound: siren
 
 Quiet Hours
-~~~~~~~~~~
+~~~~~~~~~~~
 
 Configure quiet hours to avoid notifications during sleep:
 
@@ -260,7 +260,7 @@ Step 6: Testing and Validation
 ------------------------------
 
 Test Notification Flow
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Manual Test**
    
@@ -287,7 +287,7 @@ Test Notification Flow
    * Verify notifications arrive as expected
 
 Troubleshooting Common Issues
-----------------------------
+-----------------------------
 
 No Notifications Received
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -311,7 +311,7 @@ No Notifications Received
 * **Rate Limiting**: Pushover has API limits (7,500 messages/month free)
 
 Notifications Not Working for Schedules
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * **Schedule Not Enabled**: Verify schedule is active
 * **Notification Config Not Selected**: Check schedule notification settings
@@ -319,14 +319,14 @@ Notifications Not Working for Schedules
 * **Job Failures**: Check job logs for execution issues
 
 Wrong Priority or Sound
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 * **Configuration Mismatch**: Verify priority/sound settings in Borgitory
 * **Pushover App Settings**: Check notification settings in mobile app
 * **Device-Specific Settings**: Some devices override notification settings
 
 Delayed Notifications
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 * **Network Latency**: Pushover typically delivers within seconds
 * **Device Sleep**: Some devices delay notifications when sleeping
@@ -336,7 +336,7 @@ Step 7: Monitoring and Maintenance
 ----------------------------------
 
 Monitor Notification Health
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Check Delivery Status**
    
@@ -357,7 +357,7 @@ Monitor Notification Health
    * Update device names if changed
 
 Quota Management
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 **Free Tier Limits:**
 * 7,500 messages per month
@@ -374,10 +374,10 @@ Quota Management
 * Higher quotas available for heavy users
 
 Best Practices
--------------
+--------------
 
 Notification Strategy
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 * **Success Notifications**: Enable for critical schedules only
 * **Failure Notifications**: Always enable for immediate attention
@@ -386,7 +386,7 @@ Notification Strategy
 * **Emergency Priority**: Reserve for critical failures only
 
 Message Content
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 * **Be Specific**: Include schedule name, duration, error details
 * **Use Emojis**: Visual indicators help quickly identify status
@@ -394,7 +394,7 @@ Message Content
 * **Include Context**: Timestamp, repository name, archive count
 
 Security Considerations
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 * **Secure API Tokens**: Don't commit tokens to version control
 * **Rotate Keys**: Periodically rotate API tokens

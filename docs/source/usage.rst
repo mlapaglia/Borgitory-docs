@@ -1,3 +1,8 @@
+.. meta::
+   :description lang=en:
+      Step-by-step usage guide for Borgitory covering repository setup, backup scheduling,
+      archive management, cloud sync, and monitoring operations.
+
 Usage Guide
 ===========
 
@@ -24,7 +29,7 @@ After installation, access Borgitory at http://localhost:8000:
    * Quick actions are available in the toolbar
 
 Repository Management
---------------------
+---------------------
 
 Adding Your First Repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -109,7 +114,7 @@ Manual Backup
    * Monitor transfer rates and file counts
 
 Monitoring Backup Progress
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Real-Time Progress Display**
    * Live progress bar with percentage complete
@@ -180,7 +185,7 @@ Common cron patterns:
 The interface shows human-readable descriptions of cron expressions.
 
 Managing Schedules
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 **Schedule List**
    * View all configured schedules
@@ -236,7 +241,7 @@ Creating Pruning Policies
    * **Keep Yearly**: Yearly archives to retain
 
 Executing Pruning Operations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Manual Pruning**
    1. Select repository from dropdown
@@ -251,7 +256,7 @@ Executing Pruning Operations
    * Monitor pruning results in job history
 
 Archive Browsing
----------------
+----------------
 
 Exploring Archive Contents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -281,7 +286,7 @@ Exploring Archive Contents
    * Without FUSE: Archive browsing will be disabled
 
 Downloading Files from Archives
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Direct Downloads**
    * Files stream directly from mounted archives
@@ -296,7 +301,7 @@ Downloading Files from Archives
    4. Monitor download progress in browser
 
 Cloud Synchronization
---------------------
+---------------------
 
 Configuring Cloud Providers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -366,7 +371,7 @@ Automated Cloud Sync
    * Monitor bandwidth usage over time
 
 Push Notifications
------------------
+------------------
 
 Configuring Pushover Notifications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -398,7 +403,7 @@ Configuring Pushover Notifications
    * Adjust settings if needed
 
 Notification Settings
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 **Global Settings**
    * Default notification preferences
@@ -413,10 +418,10 @@ Notification Settings
    * Priority levels and sounds
 
 Job Management
--------------
+--------------
 
 Monitoring Active Jobs
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 **Jobs Dashboard**
    * View all active and recent jobs
@@ -431,7 +436,7 @@ Monitoring Active Jobs
    * Error reporting and diagnostics
 
 Job History
-~~~~~~~~~~
+~~~~~~~~~~~
 
 **Historical Job Data**
    * Search and filter job history
@@ -446,10 +451,10 @@ Job History
    * Bottleneck identification
 
 Troubleshooting Common Issues
-----------------------------
+-----------------------------
 
 Quick Diagnostics
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 **Repository Issues**
    * Verify repository path is correct and accessible
@@ -475,7 +480,7 @@ Best Practices
 --------------
 
 Repository Management
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 * Use descriptive repository names
 * Store repositories on reliable storage
@@ -484,7 +489,7 @@ Repository Management
 * Monitor repository size growth
 
 Backup Strategy
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 * Test backup and restore procedures regularly
 * Use appropriate compression for your data
@@ -493,7 +498,7 @@ Backup Strategy
 * Document your backup procedures
 
 Security Considerations
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 * Use strong passphrases for repositories
 * Secure cloud provider credentials

@@ -1,18 +1,18 @@
 Contributing to Borgitory
-========================
+=========================
 
 Thank you for your interest in contributing to Borgitory! This guide will help you get started with contributing to the project.
 
 Getting Started
---------------
+---------------
 
 Code of Conduct
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 By participating in this project, you agree to abide by our Code of Conduct. Please be respectful and constructive in all interactions.
 
 Ways to Contribute
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 * **Bug Reports** - Help us identify and fix issues
 * **Feature Requests** - Suggest new functionality
@@ -22,10 +22,10 @@ Ways to Contribute
 * **Community Support** - Help other users in discussions and issues
 
 Development Setup
-----------------
+-----------------
 
 Prerequisites
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 * Python 3.11 or higher
 * Git
@@ -34,7 +34,7 @@ Prerequisites
 * Docker (optional, for containerized development)
 
 Setting Up the Development Environment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Fork and Clone the Repository**
 
@@ -91,10 +91,10 @@ Setting Up the Development Environment
    * Run the test suite: ``pytest``
 
 Development Workflow
--------------------
+--------------------
 
 Branch Strategy
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 * **main** - Stable release branch
 * **develop** - Integration branch for new features
@@ -111,7 +111,7 @@ Branch Strategy
 5. Submit a pull request to ``develop``
 
 Making Changes
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 **Before You Start:**
 
@@ -155,10 +155,10 @@ Making Changes
    * Update API documentation if applicable
 
 Code Style Guidelines
---------------------
+---------------------
 
 Python Code Style
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 We follow PEP 8 with some modifications:
 
@@ -206,7 +206,7 @@ We follow PEP 8 with some modifications:
            pass
 
 Frontend Guidelines
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **HTML Templates:**
 
@@ -230,10 +230,10 @@ Frontend Guidelines
 * Test in multiple browsers
 
 Testing Guidelines
------------------
+------------------
 
 Test Structure
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 .. code-block:: text
 
@@ -252,7 +252,7 @@ Test Structure
        └── sample_configs.py
 
 Writing Tests
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 **Unit Tests:**
 
@@ -323,10 +323,10 @@ Writing Tests
 * Aim for good test coverage (80%+)
 
 Documentation Guidelines
------------------------
+------------------------
 
 Documentation Types
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 * **Code Documentation** - Docstrings and inline comments
 * **API Documentation** - OpenAPI/Swagger specs
@@ -334,7 +334,7 @@ Documentation Types
 * **Developer Documentation** - Architecture and contributing guides
 
 Writing Documentation
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 **Docstrings:**
 
@@ -399,10 +399,10 @@ Follow Keep a Changelog format:
    - Resolved FUSE mounting permissions on some systems
 
 Submitting Changes
------------------
+------------------
 
 Pull Request Process
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 1. **Prepare Your Changes**
 
@@ -463,7 +463,7 @@ Pull Request Process
 * Be responsive to review feedback
 
 Commit Message Format
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 We follow Conventional Commits:
 
@@ -498,7 +498,7 @@ We follow Conventional Commits:
    test: add integration tests for backup scheduling
 
 Review Process
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 **What We Look For:**
 
@@ -518,10 +518,10 @@ Review Process
 5. **Merge** - Squash and merge to develop branch
 
 Community Guidelines
--------------------
+--------------------
 
 Getting Help
-~~~~~~~~~~~
+~~~~~~~~~~~~
 
 * **GitHub Discussions** - General questions and community support
 * **GitHub Issues** - Bug reports and feature requests
@@ -529,7 +529,7 @@ Getting Help
 * **Code Review** - Ask questions during review process
 
 Communication
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 * Be respectful and constructive
 * Provide context and examples
@@ -538,7 +538,7 @@ Communication
 * Follow up on your issues and PRs
 
 Recognition
-~~~~~~~~~~
+~~~~~~~~~~~
 
 Contributors are recognized in:
 
@@ -548,10 +548,10 @@ Contributors are recognized in:
 * **Special mentions** in project communications
 
 Project Maintenance
-------------------
+-------------------
 
 Release Process
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 1. **Version Planning** - Decide on next version features
 2. **Feature Freeze** - Stop adding new features
@@ -567,7 +567,7 @@ Release Process
 * **Patch releases** - As needed for critical fixes
 
 Issue Triage
-~~~~~~~~~~~
+~~~~~~~~~~~~
 
 **Issue Labels:**
 

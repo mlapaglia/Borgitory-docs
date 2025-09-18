@@ -32,7 +32,7 @@ Third-Party Licenses
 Borgitory uses several third-party libraries and tools. Below are their licenses:
 
 Python Dependencies
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 * **FastAPI** - MIT License
 * **SQLAlchemy** - MIT License
@@ -47,21 +47,21 @@ Python Dependencies
 * **Aiofiles** - Apache License 2.0
 
 External Tools
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 * **BorgBackup** - BSD 3-Clause License
 * **Rclone** - MIT License
 * **FUSE** - GPL v2 / LGPL
 
 Frontend Libraries
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 * **HTMX** - BSD 2-Clause License
 * **Alpine.js** - MIT License  
 * **Tailwind CSS** - MIT License
 
 Development Tools
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 * **Pytest** - MIT License
 * **Ruff** - MIT License
@@ -69,7 +69,7 @@ Development Tools
 * **Docker** - Apache License 2.0
 
 License Compatibility
---------------------
+---------------------
 
 The MIT License is a permissive license that is compatible with most other open source licenses. This means:
 
@@ -89,7 +89,7 @@ The MIT License is a permissive license that is compatible with most other open 
 * No trademark rights are granted
 
 Attribution
-----------
+-----------
 
 When using Borgitory in your projects, we appreciate (but don't require) attribution. You can:
 
@@ -98,7 +98,7 @@ When using Borgitory in your projects, we appreciate (but don't require) attribu
 * Include the project in your credits or about section
 
 Contributing
------------
+------------
 
 By contributing to Borgitory, you agree that your contributions will be licensed under the same MIT License that covers the project. See the :doc:`contributing` guide for more information.
 

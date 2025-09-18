@@ -38,7 +38,7 @@ Step 1: Create Repository
    * Test connection and save
 
 Step 2: Create Pruning Policy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Add Retention Policy**
    
@@ -57,7 +57,7 @@ Step 2: Create Pruning Policy
         Show Stats: ✓
 
 Step 3: Configure Cloud Sync
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Add S3 Configuration**
    
@@ -77,7 +77,7 @@ Step 3: Configure Cloud Sync
    * Test connection and save
 
 Step 4: Set Up Notifications
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Configure Pushover** (see :doc:`setup-pushover-notifications`)
    
@@ -85,7 +85,7 @@ Step 4: Set Up Notifications
    * Test notification delivery
 
 Step 5: Create Automated Schedule
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Add Backup Schedule**
    
@@ -130,7 +130,7 @@ Workflow 2: Multi-Source System Backup
 This workflow backs up multiple system directories with different schedules and retention policies.
 
 Repository Setup
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 Create separate repositories for different data types:
 
@@ -152,7 +152,7 @@ Create separate repositories for different data types:
    - Purpose: /var/lib, databases
 
 Pruning Policies
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 Create different retention policies:
 
@@ -177,7 +177,7 @@ Create different retention policies:
    - Keep Yearly: 2 years
 
 Schedule Configuration
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 Create multiple schedules with different frequencies:
 
@@ -229,7 +229,7 @@ Workflow 3: Database Backup with Pre/Post Scripts
 This workflow demonstrates backing up databases with proper dump procedures.
 
 Database Preparation Scripts
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Create scripts to prepare databases for backup:
 
@@ -288,7 +288,7 @@ Create scripts to prepare databases for backup:
    echo "MySQL backup preparation completed"
 
 Pre-Backup Hook Integration
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Using systemd timer with pre-backup script:**
 
@@ -325,7 +325,7 @@ Create systemd timer (``/etc/systemd/system/database-backup-prep.timer``):
    WantedBy=timers.target
 
 Database Backup Schedule
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Configure Borgitory schedule to run after database preparation:
 
@@ -347,7 +347,7 @@ Workflow 4: Incremental Backup Strategy
 This workflow demonstrates an incremental backup strategy with frequent small backups and less frequent full backups.
 
 Incremental Schedule Setup
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Hourly Incremental Backups:**
 
@@ -384,7 +384,7 @@ Incremental Schedule Setup
    Notifications: Success and Failure
 
 Incremental Retention Policy
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: text
 
@@ -402,7 +402,7 @@ Workflow 5: Multi-Cloud Redundancy
 This workflow demonstrates backing up to multiple cloud providers for redundancy.
 
 Multi-Cloud Configuration
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Primary Cloud Storage (AWS S3):**
 
@@ -435,7 +435,7 @@ Multi-Cloud Configuration
    Path Prefix: borgitory/
 
 Redundant Backup Schedule
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Primary Backup with Immediate Sync:**
 
@@ -486,7 +486,7 @@ Monitoring and Health Checks
 ----------------------------
 
 Workflow Health Monitoring
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Create Monitoring Dashboard:**
 
@@ -536,10 +536,10 @@ Create a health check script (``/scripts/backup_health_check.sh``):
    # Send alerts if issues detected
 
 Performance Optimization
------------------------
+------------------------
 
 Workflow Performance Tips
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Schedule Distribution**
    
@@ -566,10 +566,10 @@ Workflow Performance Tips
    * Consider network bandwidth for cloud sync
 
 Troubleshooting Workflows
-------------------------
+-------------------------
 
 Common Issues and Solutions
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Schedule Conflicts:**
 
@@ -603,7 +603,7 @@ Best Practices
 --------------
 
 Workflow Design Principles
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Start Simple** - Begin with basic workflows and add complexity gradually
 2. **Test Thoroughly** - Test each component before combining into workflows
@@ -612,7 +612,7 @@ Workflow Design Principles
 5. **Regular Review** - Periodically review and optimize workflows
 
 Security Considerations
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Credential Management** - Use secure storage for cloud credentials
 2. **Access Control** - Limit access to backup repositories
