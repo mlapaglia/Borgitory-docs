@@ -3,6 +3,33 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "lumache"
-authors = [{name = "Graziella", email = "graziella@lumache"}]
-dynamic = ["version", "description"]
+name = "Borgitory-docs"
+authors = [{name = "mlapaglia", email = "mlapaglia@users.noreply.github.com"}]
+description = "Documentation for Borgitory - A comprehensive web-based management interface for BorgBackup repositories"
+readme = "README.rst"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+keywords = ["borgitory", "borgbackup", "documentation", "backup", "web-interface"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: System Administrators", 
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9", 
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Documentation",
+    "Topic :: System :: Archiving :: Backup",
+    "Topic :: System :: Systems Administration",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://borgitory.readthedocs.io/"
+Documentation = "https://borgitory.readthedocs.io/"
+Repository = "https://github.com/mlapaglia/Borgitory"
+"Bug Reports" = "https://github.com/mlapaglia/Borgitory/issues"
