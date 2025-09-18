@@ -18,6 +18,18 @@ Welcome to Borgitory's Documentation!
    :target: https://pypi.org/project/borgitory/
    :alt: PyPI Downloads
 
+.. image:: https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmlapaglia%2FBorgitory%2Frefs%2Fheads%2Fmain%2FDockerfile&search=ARG%20BORGBACKUP_VERSION%3D(.%2B)&replace=%241&logo=borgbackup&label=BorgBackup
+   :target: https://borgbackup.readthedocs.io/
+   :alt: PyPI Downloads
+
+.. image:: https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmlapaglia%2FBorgitory%2Frefs%2Fheads%2Fmain%2FDockerfile&search=ARG%20RCLONE_VERSION%3D(.%2B)&replace=%241&logo=rclone&label=Rclone
+   :target: https://rclone.org/
+   :alt: PyPI Downloads
+
+.. image:: https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmlapaglia%2FBorgitory%2Frefs%2Fheads%2Fmain%2FDockerfile&search=ARG%20FUSE3_VERSION%3D(.%2B)&replace=%241&logo=python&label=pfuse3
+   :target: https://github.com/libfuse/libfuse
+   :alt: PyPI Downloads
+
 **Borgitory** is a comprehensive web-based management interface for `BorgBackup <https://borgbackup.readthedocs.io/>`_ repositories 
 with real-time monitoring, automated scheduling, and cloud synchronization capabilities.
 
