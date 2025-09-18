@@ -281,8 +281,8 @@ The system will automatically:
 
 Simply create your template file and it will be automatically integrated!
 
-What's Simplified by the Registry Pattern ✨
--------------------------------------------
+What's Simplified by the Registry Pattern
+-----------------------------------------
 
 Thanks to the registry pattern, many things are automated:
 
@@ -730,7 +730,7 @@ The registry pattern provides these key advantages:
 .. code-block:: text
 
    1. Create storage classes ✏️
-   2. Add @register_provider decorator ✨
+   2. Add @register_provider decorator ✏️
    3. Create frontend template ✏️
    4. Add rclone service methods ✏️
    5. Update rclone dispatcher methods ✏️
