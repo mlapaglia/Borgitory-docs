@@ -550,6 +550,23 @@ FUSE Mount Problems
    lsmod | grep fuse
    sudo modprobe fuse
 
+.. warning::
+
+   **Windows Users:** FUSE is not available on Windows systems. Archive browsing 
+   functionality requires FUSE and will not work with PyPI installation on Windows.
+   
+   **Recommended Solution:** Use Docker installation on Windows, which provides 
+   a Linux environment where FUSE works properly:
+   
+   .. code-block:: bash
+   
+      docker run -d \
+        --name borgitory \
+        -p 8000:8000 \
+        --cap-add SYS_ADMIN \
+        --device /dev/fuse \
+        mlapaglia/borgitory:latest
+
 **Mount Permission Errors**
 
 .. code-block:: text

@@ -59,15 +59,36 @@ Key Features
 * **Push Notifications**: Pushover integration for job completion alerts
 * **Modern UI**: Responsive interface built with HTMX, Alpine.js, and Tailwind CSS
 
+Quick Start with Docker
+-----------------------
+
+The easiest way to get started with Borgitory is using Docker:
+
+.. code-block:: bash
+
+   # Pull the latest image
+   docker pull mlapaglia/borgitory:latest
+
+   # Run Borgitory
+   docker run -d \
+     --name borgitory \
+     -p 8000:8000 \
+     -v /path/to/your/repos:/repos \
+     -v borgitory-data:/app/data \
+     mlapaglia/borgitory:latest
+
+   # Access at http://localhost:8000
+
+For production deployments and advanced configuration, see the :doc:`installation` guide.
+
 .. note::
 
-   Borgitory requires BorgBackup to be installed and available in your system PATH. 
-   For cloud synchronization features, Rclone is also required.
+   Borgitory requires BorgBackup to be available. The Docker image includes BorgBackup and Rclone pre-installed.
 
 Quick Links
 -----------
 
-* :doc:`installation` - Get started with Docker or PyPI installation
+* :doc:`installation` - Docker deployment and alternative installation methods
 * :doc:`features` - Comprehensive feature overview  
 * :doc:`usage` - Step-by-step usage guide
 * :doc:`how-to/index` - Task-specific guides and recipes
