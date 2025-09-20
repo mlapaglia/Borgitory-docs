@@ -40,21 +40,28 @@ Step 1: Create Repository
 Step 2: Create Pruning Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. **Add Retention Policy**
+1. **Add Prune Policy**
    
-   * Go to Cleanup → Add Pruning Policy
-   * Configure retention settings:
+   * Go to Archive Pruning
+   * Configure the pruning interface as shown:
+
+   .. figure:: /_static/how-to/automated-backup-workflows/cleanup_policy_creation.png
+      :alt: Cleanup policy creation interface showing policy name and retention settings
+      :width: 80%
+      :align: center
+      
+      Create a new pruning policy with custom retention settings
+
+   * Configure prune settings:
      
      .. code-block:: text
      
-        Name: Documents Retention
+        Name: Documents Prune
         Strategy: Advanced
         Keep Daily: 7 days
         Keep Weekly: 4 weeks
         Keep Monthly: 6 months
         Keep Yearly: 2 years
-        Show Details: ✓
-        Show Stats: ✓
 
 Step 3: Configure Cloud Sync
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,6 +97,32 @@ Step 5: Create Automated Schedule
 1. **Add Backup Schedule**
    
    * Go to Schedules → Add Schedule
+   * Choose your scheduling method:
+
+   **Option 1: Use Predefined Schedule**
+   
+   Select from common scheduling options using the dropdown menu:
+
+   .. figure:: /_static/how-to/automated-backup-workflows/cron_description.png
+      :alt: Predefined cron schedule dropdown showing common options like Daily at 2:00 AM
+      :width: 80%
+      :align: center
+      
+      Select from predefined scheduling options for common backup frequencies
+
+   **Option 2: Create Custom Cron Expression**
+   
+   For more specific timing requirements, choose "Custom (cron expression)" and enter your own cron pattern:
+
+   .. figure:: /_static/how-to/automated-backup-workflows/custom_cron_description.png
+      :alt: Custom cron expression interface showing manual entry field with example pattern
+      :width: 80%
+      :align: center
+      
+      Create custom cron expressions for precise scheduling control
+
+   For detailed information about cron expression syntax and advanced scheduling options, see the `APScheduler Cron Trigger documentation <https://apscheduler.readthedocs.io/en/stable/modules/triggers/cron.html>`_.
+
    * Configure complete workflow:
      
      .. code-block:: text
@@ -105,7 +138,7 @@ Step 5: Create Automated Schedule
         Compression: lz4
         
         Pruning:
-        Pruning Policy: Documents Retention
+        Pruning Policy: Documents Prune
         Run After Backup: ✓
         
         Cloud Sync:
@@ -127,7 +160,7 @@ Step 5: Create Automated Schedule
 Workflow 2: Multi-Source System Backup
 --------------------------------------
 
-This workflow backs up multiple system directories with different schedules and retention policies.
+This workflow backs up multiple system directories with different schedules and prune policies.
 
 Repository Setup
 ~~~~~~~~~~~~~~~~
@@ -154,23 +187,23 @@ Create separate repositories for different data types:
 Pruning Policies
 ~~~~~~~~~~~~~~~~
 
-Create different retention policies:
+Create different prune policies:
 
 .. code-block:: text
 
-   System Config Retention:
+   System Config Prune:
    - Keep Daily: 30 days
    - Keep Weekly: 12 weeks
    - Keep Monthly: 24 months
    - Keep Yearly: 5 years
    
-   User Data Retention:
+   User Data Prune:
    - Keep Daily: 7 days
    - Keep Weekly: 8 weeks
    - Keep Monthly: 12 months
    - Keep Yearly: 3 years
    
-   Application Data Retention:
+   Application Data Prune:
    - Keep Daily: 14 days
    - Keep Weekly: 6 weeks
    - Keep Monthly: 6 months
@@ -222,265 +255,6 @@ Create multiple schedules with different frequencies:
    Cron: 0 4 * * * (daily at 4 AM)
    Archive Name: appdata-{now:%Y%m%d}
    Compression: zlib (balanced compression)
-
-Workflow 3: Database Backup with Pre/Post Scripts
--------------------------------------------------
-
-This workflow demonstrates backing up databases with proper dump procedures.
-
-Database Preparation Scripts
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Create scripts to prepare databases for backup:
-
-**PostgreSQL Dump Script** (``/scripts/pg_backup.sh``):
-
-.. code-block:: bash
-
-   #!/bin/bash
-   # PostgreSQL backup preparation
-   
-   BACKUP_DIR="/mnt/backup/sources/databases/postgresql"
-   DATE=$(date +%Y%m%d_%H%M%S)
-   
-   # Create backup directory
-   mkdir -p "$BACKUP_DIR"
-   
-   # Dump all databases
-   sudo -u postgres pg_dumpall > "$BACKUP_DIR/pg_dumpall_$DATE.sql"
-   
-   # Dump individual databases
-   sudo -u postgres psql -c "SELECT datname FROM pg_database WHERE NOT datistemplate AND datname != 'postgres';" -t | while read dbname; do
-       if [ -n "$dbname" ]; then
-           sudo -u postgres pg_dump "$dbname" > "$BACKUP_DIR/${dbname}_$DATE.sql"
-       fi
-   done
-   
-   # Clean old dumps (keep 3 days)
-   find "$BACKUP_DIR" -name "*.sql" -mtime +3 -delete
-   
-   echo "PostgreSQL backup preparation completed"
-
-**MySQL Dump Script** (``/scripts/mysql_backup.sh``):
-
-.. code-block:: bash
-
-   #!/bin/bash
-   # MySQL backup preparation
-   
-   BACKUP_DIR="/mnt/backup/sources/databases/mysql"
-   DATE=$(date +%Y%m%d_%H%M%S)
-   
-   # Create backup directory
-   mkdir -p "$BACKUP_DIR"
-   
-   # Dump all databases
-   mysqldump --all-databases --single-transaction --routines --triggers > "$BACKUP_DIR/mysql_all_$DATE.sql"
-   
-   # Dump individual databases
-   mysql -e "SHOW DATABASES;" | grep -v -E '^(Database|information_schema|performance_schema|mysql|sys)$' | while read dbname; do
-       mysqldump --single-transaction --routines --triggers "$dbname" > "$BACKUP_DIR/${dbname}_$DATE.sql"
-   done
-   
-   # Clean old dumps
-   find "$BACKUP_DIR" -name "*.sql" -mtime +3 -delete
-   
-   echo "MySQL backup preparation completed"
-
-Pre-Backup Hook Integration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Using systemd timer with pre-backup script:**
-
-Create systemd service (``/etc/systemd/system/database-backup-prep.service``):
-
-.. code-block:: ini
-
-   [Unit]
-   Description=Database Backup Preparation
-   Before=borgitory-database-backup.service
-   
-   [Service]
-   Type=oneshot
-   ExecStart=/scripts/pg_backup.sh
-   ExecStart=/scripts/mysql_backup.sh
-   User=root
-   
-   [Install]
-   WantedBy=multi-user.target
-
-Create systemd timer (``/etc/systemd/system/database-backup-prep.timer``):
-
-.. code-block:: ini
-
-   [Unit]
-   Description=Run database backup preparation
-   Requires=database-backup-prep.service
-   
-   [Timer]
-   OnCalendar=*-*-* 05:30:00
-   Persistent=true
-   
-   [Install]
-   WantedBy=timers.target
-
-Database Backup Schedule
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Configure Borgitory schedule to run after database preparation:
-
-.. code-block:: text
-
-   Name: Database Backup
-   Repository: Database Backup
-   Source Path: /mnt/backup/sources/databases
-   Cron: 30 5 * * * (daily at 5:30 AM, after prep scripts)
-   Archive Name: databases-{now:%Y%m%d}
-   Compression: lzma (high compression for SQL dumps)
-   Pruning Policy: Database Retention
-   Cloud Sync: Database S3 Backup
-   Notifications: Critical Alerts
-
-Workflow 4: Incremental Backup Strategy
----------------------------------------
-
-This workflow demonstrates an incremental backup strategy with frequent small backups and less frequent full backups.
-
-Incremental Schedule Setup
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Hourly Incremental Backups:**
-
-.. code-block:: text
-
-   Name: Hourly Incremental Backup
-   Repository: Active Data Repository
-   Source Path: /mnt/backup/sources/active-data
-   Cron: 0 * * * * (every hour)
-   Archive Name: incremental-{now:%Y%m%d-%H}
-   Compression: lz4 (fast for frequent backups)
-   Exclude Patterns:
-   - *.tmp
-   - .cache/
-   - *.lock
-   Pruning: None (handled by daily cleanup)
-   Cloud Sync: None (handled by daily sync)
-   Notifications: Failure only
-
-**Daily Full Backup with Cleanup:**
-
-.. code-block:: text
-
-   Name: Daily Full Backup with Cleanup
-   Repository: Active Data Repository
-   Source Path: /mnt/backup/sources/active-data
-   Cron: 0 23 * * * (daily at 11 PM)
-   Archive Name: daily-{now:%Y%m%d}
-   Compression: zlib (balanced compression)
-   Pruning Policy: Incremental Retention
-   Run Pruning: ✓
-   Cloud Sync: Active Data S3
-   Sync After Backup: ✓
-   Notifications: Success and Failure
-
-Incremental Retention Policy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: text
-
-   Name: Incremental Retention
-   Strategy: Advanced
-   Keep Hourly: 48 hours (2 days of hourly backups)
-   Keep Daily: 14 days
-   Keep Weekly: 8 weeks
-   Keep Monthly: 6 months
-   Keep Yearly: 2 years
-
-Workflow 5: Multi-Cloud Redundancy
-----------------------------------
-
-This workflow demonstrates backing up to multiple cloud providers for redundancy.
-
-Multi-Cloud Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Primary Cloud Storage (AWS S3):**
-
-.. code-block:: text
-
-   Name: Primary S3 Storage
-   Provider: s3
-   Bucket: primary-backup-bucket
-   Region: us-east-1
-   Path Prefix: borgitory/
-
-**Secondary Cloud Storage (Google Cloud):**
-
-.. code-block:: text
-
-   Name: Secondary GCS Storage
-   Provider: google-cloud-storage
-   Bucket: secondary-backup-bucket
-   Region: us-central1
-   Path Prefix: borgitory/
-
-**Tertiary Cloud Storage (Azure):**
-
-.. code-block:: text
-
-   Name: Tertiary Azure Storage
-   Provider: azure-blob-storage
-   Container: tertiary-backup-container
-   Region: eastus
-   Path Prefix: borgitory/
-
-Redundant Backup Schedule
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Primary Backup with Immediate Sync:**
-
-.. code-block:: text
-
-   Name: Primary Backup with Multi-Cloud
-   Repository: Critical Data Repository
-   Source Path: /mnt/backup/sources/critical-data
-   Cron: 0 2 * * * (daily at 2 AM)
-   Archive Name: critical-{now:%Y%m%d}
-   Compression: lzma
-   Pruning Policy: Critical Data Retention
-   
-   Cloud Sync: Primary S3 Storage
-   Sync After Backup: ✓
-   
-   Notifications: All events
-
-**Secondary Cloud Sync (Offset Schedule):**
-
-.. code-block:: text
-
-   Name: Secondary Cloud Sync
-   Repository: Critical Data Repository
-   Cron: 0 4 * * * (daily at 4 AM, 2 hours after primary)
-   Type: Cloud Sync Only
-   
-   Cloud Sync: Secondary GCS Storage
-   Sync Full Repository: ✓
-   
-   Notifications: Failure only
-
-**Weekly Tertiary Sync:**
-
-.. code-block:: text
-
-   Name: Weekly Tertiary Sync
-   Repository: Critical Data Repository
-   Cron: 0 6 * * 0 (weekly on Sunday at 6 AM)
-   Type: Cloud Sync Only
-   
-   Cloud Sync: Tertiary Azure Storage
-   Sync Full Repository: ✓
-   
-   Notifications: Success and Failure
 
 Monitoring and Health Checks
 ----------------------------
