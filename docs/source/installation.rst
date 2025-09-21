@@ -1,12 +1,13 @@
 .. meta::
    :description lang=en:
-      Complete installation guide for Borgitory including Docker, PyPI, and source installation methods.
+      Complete installation guide for Borgitory with Docker as the recommended method, plus PyPI and source installation alternatives.
       Learn how to set up BorgBackup web interface with step-by-step instructions.
 
 Installation Guide
 ==================
 
 Borgitory can be installed in multiple ways depending on your preferences and environment. 
+**Docker is the recommended installation method** as it provides the easiest setup with all dependencies included.
 This guide covers all installation methods and their requirements.
 
 Prerequisites
@@ -21,50 +22,18 @@ System Requirements
 * **Python**: 3.11 or higher (for PyPI installation)
 * **Docker**: Docker with Docker Compose (for containerized deployment)
 
-Required Dependencies
-~~~~~~~~~~~~~~~~~~~~~
+.. note::
 
-* **BorgBackup**: Must be installed and available in your system PATH
-* **Rclone**: Optional, required for cloud synchronization features
+   **Windows Users:** For full functionality including archive browsing, Docker installation 
+   is strongly recommended as FUSE (required for archive browsing) is not available on Windows.
 
 Installation Methods
 --------------------
 
-Method 1: PyPI Installation (Recommended)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Method 1: Docker Installation (Recommended)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The simplest way to install Borgitory is via PyPI:
-
-.. code-block:: bash
-
-   # Install stable release from PyPI
-   pip install borgitory
-
-   # Start the server
-   borgitory serve
-
-   # Or run with custom settings
-   borgitory serve --host 0.0.0.0 --port 8000
-
-**PyPI Installation Requirements:**
-
-* Python 3.11 or higher
-* BorgBackup installed and available in PATH
-* Rclone (optional, for cloud sync features)
-
-**Pre-release Testing:**
-
-Pre-release versions are available on TestPyPI for testing:
-
-.. code-block:: bash
-
-   # Install pre-release from TestPyPI
-   pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ borgitory
-
-Method 2: Docker Installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Docker provides an isolated environment with all dependencies pre-configured.
+Docker is the recommended way to run Borgitory as it provides an isolated environment with all dependencies pre-configured:
 
 Using Docker Directly
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -110,6 +79,48 @@ Then start the container:
 .. code-block:: bash
 
    docker-compose up -d
+
+**Docker Installation Benefits:**
+
+* All dependencies (BorgBackup, Rclone, FUSE) pre-installed
+* Isolated environment with consistent behavior
+* Easy updates and rollbacks
+* No system-level dependency conflicts
+
+Method 2: PyPI Installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For users who prefer a native Python installation:
+
+.. code-block:: bash
+
+   # Install stable release from PyPI
+   pip install borgitory
+
+   # Start the server
+   borgitory serve
+
+   # Or run with custom settings
+   borgitory serve --host 0.0.0.0 --port 8000
+
+**PyPI Installation Requirements:**
+
+* Python 3.11 or higher
+* BorgBackup installed and available in PATH
+* Rclone (optional, for cloud sync features)
+* FUSE (Linux/macOS only, for archive browsing)
+
+.. note::
+
+   PyPI installation requires manual setup of BorgBackup and Rclone dependencies.
+   For easier setup, consider using the Docker installation method.
+
+.. warning::
+
+   **Windows Limitation:** FUSE (Filesystem in Userspace) is not available on Windows, 
+   which means archive browsing functionality will not work with PyPI installation on Windows.
+   The Docker installation includes a Linux environment where FUSE works properly,
+   making it the recommended approach for Windows users who need archive browsing.
 
 Method 3: Development Installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

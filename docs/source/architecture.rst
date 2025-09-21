@@ -263,6 +263,321 @@ Background Job Processing
                args=[schedule.id]
            )
 
+JobManager Dependency Injection Pattern
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Overview**
+
+The JobManager uses a **dual-function dependency injection pattern** to handle both FastAPI request-scoped dependencies and application-scoped singleton access. This pattern is essential for managing long-running background tasks while maintaining proper dependency injection principles.
+
+**The Pattern**
+
+.. code-block:: python
+
+   @lru_cache()
+   def get_job_manager_singleton() -> "JobManagerProtocol":
+       """
+       Create JobManager singleton for application-scoped use.
+       
+       ✅ Use for: Singletons, direct instantiation, tests, background tasks
+       ❌ Don't use for: FastAPI endpoints (use get_job_manager_dependency instead)
+       """
+       # Resolve all dependencies directly (not via FastAPI DI)
+       # ... dependency resolution ...
+       return JobManager(config=config, dependencies=dependencies)
+
+   def get_job_manager_dependency(
+       # All FastAPI dependencies listed here for injection
+       config: JobManagerConfig = Depends(_create_job_manager_config),
+       job_executor: JobExecutor = Depends(get_job_executor),
+       # ... other dependencies ...
+   ) -> "JobManagerProtocol":
+       """
+       Provide JobManager with FastAPI dependency injection.
+       
+       ✅ Use for: FastAPI endpoints with Depends(get_job_manager_dependency)
+       ❌ Don't use for: Direct calls, background tasks, tests
+       """
+       # Both functions return the same singleton instance
+       return get_job_manager_singleton()
+
+**Why This Pattern is Necessary**
+
+*The Problem: FastAPI + Long-Running Tasks*
+
+FastAPI's dependency injection system is designed for **request-scoped** operations. However, job management requires:
+
+1. **State Persistence** - Jobs must persist across multiple HTTP requests
+2. **Background Processing** - Tasks run independently of HTTP request lifecycle
+3. **Singleton Behavior** - All parts of the application must see the same job state
+
+*The Challenge*
+
+.. code-block:: python
+
+   # ❌ BROKEN: This creates a new JobManager for each request
+   @router.post("/jobs/backup")
+   async def create_backup(job_manager: JobManager = Depends(get_job_manager)):
+       job_id = job_manager.start_backup()  # Job stored in instance A
+       return {"job_id": job_id}
+
+   @router.get("/jobs/{job_id}")
+   async def get_job(job_id: str, job_manager: JobManager = Depends(get_job_manager)):
+       return job_manager.get_job(job_id)  # Looking in instance B - job not found!
+
+*The Solution: Dual Functions*
+
+The dual-function pattern ensures:
+
+* **Same Instance** - Both functions return the identical singleton
+* **Proper DI** - FastAPI endpoints get dependency injection
+* **Direct Access** - Background tasks get direct singleton access
+
+**Usage Examples**
+
+*FastAPI Endpoint Usage*
+
+.. code-block:: python
+
+   from borgitory.dependencies import RequestScopedJobManager
+
+   @router.post("/jobs/backup")
+   async def create_backup(
+       request: BackupRequest,
+       job_manager: RequestScopedJobManager,  # Uses Depends() internally
+   ) -> dict:
+       """Create a backup job via FastAPI endpoint."""
+       job_id = await job_manager.start_backup_job(
+           repository_id=request.repository_id,
+           source_path=request.source_path
+       )
+       return {"job_id": job_id, "status": "started"}
+
+   @router.get("/jobs/{job_id}")
+   async def get_job_status(
+       job_id: str,
+       job_manager: RequestScopedJobManager,
+   ) -> dict:
+       """Get job status via FastAPI endpoint."""
+       job = job_manager.get_job(job_id)
+       if not job:
+           raise HTTPException(status_code=404, detail="Job not found")
+       
+       return {
+           "job_id": job_id,
+           "status": job.status,
+           "progress": job.progress
+       }
+
+*Background Task Usage*
+
+.. code-block:: python
+
+   import asyncio
+   from borgitory.dependencies import get_job_manager_singleton
+
+   async def cleanup_completed_jobs():
+       """Background task to clean up old completed jobs."""
+       # Direct singleton access - no FastAPI DI needed
+       job_manager = get_job_manager_singleton()
+       
+       completed_jobs = job_manager.get_completed_jobs(older_than_days=7)
+       for job in completed_jobs:
+           await job_manager.cleanup_job(job.id)
+           print(f"Cleaned up job {job.id}")
+
+   async def job_monitor_daemon():
+       """Long-running daemon to monitor job health."""
+       job_manager = get_job_manager_singleton()
+       
+       while True:
+           # Check for stuck jobs
+           stuck_jobs = job_manager.get_stuck_jobs()
+           for job in stuck_jobs:
+               await job_manager.restart_job(job.id)
+           
+           await asyncio.sleep(60)  # Check every minute
+
+   # Start background tasks
+   asyncio.create_task(cleanup_completed_jobs())
+   asyncio.create_task(job_monitor_daemon())
+
+*Testing Usage*
+
+.. code-block:: python
+
+   import pytest
+   from borgitory.dependencies import get_job_manager_singleton
+
+   def test_job_creation():
+       """Test job creation with direct singleton access."""
+       job_manager = get_job_manager_singleton()
+       
+       job_id = job_manager.create_job("backup", {"source": "/data"})
+       assert job_id is not None
+       
+       job = job_manager.get_job(job_id)
+       assert job.status == "pending"
+
+   @pytest.fixture
+   def job_manager():
+       """Fixture providing JobManager for tests."""
+       return get_job_manager_singleton()
+
+   def test_job_lifecycle(job_manager):
+       """Test complete job lifecycle."""
+       job_id = job_manager.start_backup_job("/data", "/backup")
+       
+       # Job should be running
+       job = job_manager.get_job(job_id)
+       assert job.status in ["pending", "running"]
+       
+       # Simulate completion
+       job_manager.complete_job(job_id)
+       job = job_manager.get_job(job_id)
+       assert job.status == "completed"
+
+**Type Aliases for Clarity**
+
+.. code-block:: python
+
+   # Semantic type aliases make usage intent crystal clear
+   ApplicationScopedJobManager = "JobManagerProtocol"  # Direct singleton access
+   RequestScopedJobManager = Annotated[
+       "JobManagerProtocol", 
+       Depends(get_job_manager_dependency)
+   ]  # FastAPI DI
+
+   # Usage examples:
+   def background_task():
+       manager: ApplicationScopedJobManager = get_job_manager_singleton()
+
+   async def api_endpoint(manager: RequestScopedJobManager):
+       # FastAPI automatically injects the singleton
+       pass
+
+**Key Benefits**
+
+1. **State Consistency**
+
+   .. code-block:: python
+
+      # Same job visible across all contexts
+      job_id = create_backup_via_api()  # FastAPI endpoint
+      status = check_job_in_background(job_id)  # Background task
+      assert status is not None  # ✅ Works!
+
+2. **Proper Dependency Injection**
+
+   .. code-block:: python
+
+      # FastAPI endpoints get full DI benefits
+      async def endpoint(
+          job_manager: RequestScopedJobManager,  # Injected
+          db: Session = Depends(get_db),         # Injected
+          user: User = Depends(get_current_user) # Injected
+      ):
+          # All dependencies properly resolved
+
+3. **Performance Optimization**
+
+   .. code-block:: python
+
+      # Singleton pattern avoids expensive re-initialization
+      @lru_cache()  # Cached after first call
+      def get_job_manager_singleton():
+          # Heavy initialization only happens once
+          return JobManager(expensive_setup=True)
+
+4. **Testing Flexibility**
+
+   .. code-block:: python
+
+      # Easy to mock in tests
+      def test_with_mock():
+          with patch('borgitory.dependencies.get_job_manager_singleton') as mock:
+              mock.return_value = MockJobManager()
+              # Test uses mock instead of real singleton
+
+**Anti-Patterns to Avoid**
+
+*Don't Mix the Functions*
+
+.. code-block:: python
+
+   # WRONG: Using dependency function directly
+   def background_task():
+       # This will fail - Depends objects can't be called directly
+       manager = get_job_manager_dependency()  # ❌ RuntimeError
+
+*Don't Create Multiple Instances*
+
+.. code-block:: python
+
+   # WRONG: Creating JobManager directly
+   def some_function():
+       manager = JobManager()  # ❌ Creates separate instance
+       # This instance won't see jobs from other parts of the app
+
+*Don't Use Global Variables*
+
+.. code-block:: python
+
+   # WRONG: Module-level global
+   _job_manager = None
+
+   def get_job_manager():
+       global _job_manager
+       if not _job_manager:
+           _job_manager = JobManager()  # ❌ Anti-pattern
+       return _job_manager
+
+**Implementation Details**
+
+*Dependency Resolution*
+
+The singleton function resolves all dependencies directly:
+
+.. code-block:: python
+
+   @lru_cache()
+   def get_job_manager_singleton():
+       # Direct dependency resolution (not via FastAPI)
+       config = _create_job_manager_config()
+       job_executor = get_job_executor()
+       output_manager = get_job_output_manager()
+       # ... resolve all dependencies ...
+       
+       return JobManager(config=config, dependencies=dependencies)
+
+*Runtime Safety*
+
+The dependency function includes runtime checks:
+
+.. code-block:: python
+
+   def get_job_manager_dependency(...):
+       # Prevent misuse
+       if hasattr(job_executor, "dependency"):
+           raise RuntimeError(
+               "get_job_manager_dependency() was called directly with Depends objects. "
+               "Use get_job_manager_singleton() for direct calls instead."
+           )
+       
+       return get_job_manager_singleton()
+
+**Pattern Summary**
+
+This dual-function pattern solves the fundamental challenge of using FastAPI's request-scoped dependency injection with application-scoped services that manage long-running tasks. It provides:
+
+* **Consistency** - Same instance across all contexts
+* **Proper DI** - Full FastAPI dependency injection support
+* **Flexibility** - Works in endpoints, background tasks, and tests
+* **Performance** - Singleton pattern with caching
+* **Safety** - Runtime checks prevent misuse
+
+The pattern is essential for any FastAPI application that needs to manage stateful, long-running operations while maintaining clean dependency injection architecture.
+
 Real-Time Updates
 ~~~~~~~~~~~~~~~~~
 

@@ -7,6 +7,7 @@ Usage Guide
 ===========
 
 This guide walks you through using Borgitory's key features step-by-step, from initial setup to advanced operations.
+Examples assume you're using the recommended Docker installation method.
 
 Getting Started
 ---------------
@@ -14,7 +15,18 @@ Getting Started
 First-Time Setup
 ~~~~~~~~~~~~~~~~
 
-After installation, access Borgitory at http://localhost:8000:
+After starting Borgitory with Docker, access the web interface at http://localhost:8000:
+
+.. code-block:: bash
+
+   # Start Borgitory (if not already running)
+   docker run -d \
+     --name borgitory \
+     -p 8000:8000 \
+     -v borgitory-data:/app/data \
+     mlapaglia/borgitory:latest
+
+Now you can access the web interface:
 
 1. **Create Admin Account**
    
