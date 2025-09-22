@@ -43,25 +43,12 @@ Step 2: Create Pruning Policy
 1. **Add Prune Policy**
    
    * Go to Archive Pruning
-   * Configure the pruning interface as shown:
+   * Create a new pruning policy with custom retention settings
 
    .. figure:: /_static/how-to/automated-backup-workflows/cleanup_policy_creation.png
       :alt: Cleanup policy creation interface showing policy name and retention settings
       :width: 80%
       :align: center
-      
-      Create a new pruning policy with custom retention settings
-
-   * Configure prune settings:
-     
-     .. code-block:: text
-     
-        Name: Documents Prune
-        Strategy: Advanced
-        Keep Daily: 7 days
-        Keep Weekly: 4 weeks
-        Keep Monthly: 6 months
-        Keep Yearly: 2 years
 
 Step 3: Configure Cloud Sync
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
