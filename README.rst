@@ -1,9 +1,5 @@
-Template for the Read the Docs tutorial
-=======================================
-
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
-
-Read the tutorial here:
-
-https://docs.readthedocs.io/en/stable/tutorial/
+Borgitory Read the Docs
+=======================
+.. image:: https://img.shields.io/readthedocs/borgitory?logo=readthedocs
+   :target: https://github.com/mlapaglia/Borgitory/actions/workflows/release.yml
+   :alt: Read the Docs
