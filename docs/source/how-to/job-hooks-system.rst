@@ -41,7 +41,10 @@ Post-job hooks execute **after** the backup process completes. They are useful f
 Adding Hooks to a Schedule
 ==========================
 
-*[Screenshot placeholder: Schedule creation form with "Configure Hooks" button]*
+   .. figure:: /_static/how-to/job-hooks/schedule_hook_section.png
+      :alt: How to open the pre/post hook modal
+      :width: 80%
+      :align: center
 
 1. **Navigate to Schedule Creation/Editing**
    
@@ -53,7 +56,10 @@ Adding Hooks to a Schedule
    - Click the "Configure Hooks" button in the schedule form
    - This opens the hooks configuration modal
 
-*[Screenshot placeholder: Hooks configuration modal showing pre-hook and post-hook sections]*
+   .. figure:: /_static/how-to/job-hooks/job_hooks_modal.png
+      :alt: How to add pre/post hooks to a schedule
+      :width: 80%
+      :align: center
 
 3. **Add Pre-Job Hooks**
    
@@ -121,7 +127,10 @@ Service Dependency
 
 **Why Critical:** If the service can't be stopped cleanly, files may be in an inconsistent state.
 
-*[Screenshot placeholder: Hook configuration showing critical checkbox enabled]*
+   .. figure:: /_static/how-to/job-hooks/critical_prehook.png
+      :alt: How to mark a pre-hook as critical
+      :width: 80%
+      :align: center
 
 Run on Job Failure (Post-Hooks Only)
 ------------------------------------
@@ -166,7 +175,10 @@ Service Restart
 
 **Why Always Run:** Services should be restarted even if the backup failed to ensure system availability.
 
-*[Screenshot placeholder: Post-hook configuration showing "Run Even If Job Failed" checkbox]*
+   .. figure:: /_static/how-to/job-hooks/post_hook_run_if_failed.png
+      :alt: How to make a post-hook run even if the job failed
+      :width: 80%
+      :align: center
 
 Hook Execution Flow
 ===================
@@ -200,8 +212,6 @@ Critical Pre-Hook Failure
    7. Notification                       → ✅ Success
    
    Result: ❌ Job Failed - Critical Hook Error
-
-*[Screenshot placeholder: Job history showing skipped tasks after critical failure]*
 
 Backup Task Failure
 -------------------
@@ -243,8 +253,6 @@ When viewing job history, tasks will show different statuses based on execution 
 - **⏭️  Skipped:** Task was not executed due to an earlier critical failure
 - **⏸️  Pending:** Task has not yet been executed (job still running)
 
-*[Screenshot placeholder: Job details page showing mixed task statuses]*
-
 Skipped Task Behavior
 =====================
 
@@ -253,8 +261,6 @@ When a critical hook or backup task fails, all subsequent tasks are automaticall
 - **Critical Hook Failure:** "Task skipped due to critical hook failure"
 - **Critical Task Failure:** "Task skipped due to critical task failure"
 - **Critical Task Exception:** "Task skipped due to critical task exception"
-
-*[Screenshot placeholder: Task details showing skip reason]*
 
 Environment Variables
 =====================
@@ -331,7 +337,10 @@ Job with Warnings
    Tasks Completed: 6, Skipped: 0, Total: 7
    Job ID: job-abc-123
 
-*[Screenshot placeholder: Notification examples showing different failure types]*
+   .. figure:: /_static/how-to/job-hooks/failed_prehook.png
+      :alt: How to open the failed pre-hook
+      :width: 80%
+      :align: center
 
 Common Hook Examples
 ====================
@@ -637,8 +646,6 @@ Common Issues and Solutions
 Hook Not Executing
 ~~~~~~~~~~~~~~~~~~
 
-*[Screenshot placeholder: Job details showing hook with error message]*
-
 **Symptoms:** Hook shows as "Failed" immediately without output
 
 **Possible Causes:**
@@ -714,8 +721,6 @@ Add debugging output to your hooks:
    
    echo "Hook completed at $(date)"
 
-*[Screenshot placeholder: Job logs showing detailed hook output]*
-
 Test Hooks Manually
 ~~~~~~~~~~~~~~~~~~~
 
@@ -749,17 +754,6 @@ Check system resources during hook execution:
 
 Advanced Configuration
 ======================
-
-Hook Timeouts
--------------
-
-*[Screenshot placeholder: Hook configuration showing timeout settings]*
-
-Each hook can have a custom timeout (default: 300 seconds):
-
-- **Short operations:** 30-60 seconds (file operations, service restarts)
-- **Medium operations:** 300-600 seconds (database dumps, file transfers)
-- **Long operations:** 1800+ seconds (large database exports, network transfers)
 
 Custom Shell Configuration
 --------------------------
@@ -839,8 +833,6 @@ From Shell Scripts
 - **Backup:** Configured in Borgitory UI
 - **Post-hook:** ``rm /tmp/dump.sql``
 
-*[Screenshot placeholder: Migration wizard or import tool]*
-
 API Integration
 ===============
 
@@ -884,4 +876,7 @@ Key benefits:
 
 Start with simple hooks and gradually build more sophisticated automation as your needs grow. The system is designed to be both powerful for advanced users and accessible for those just getting started with backup automation.
 
-*[Screenshot placeholder: Dashboard showing successful automated backup with hooks]*
+   .. figure:: /_static/how-to/job-hooks/successful_backup_with_hooks.png
+      :alt: How to open the successful backup with hooks
+      :width: 80%
+      :align: center
