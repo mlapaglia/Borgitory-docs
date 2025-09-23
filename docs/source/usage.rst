@@ -180,6 +180,7 @@ Creating Backup Schedules
    * **Pruning Policy**: Attach retention policy
    * **Notifications**: Configure success/failure alerts
    * **Cloud Sync**: Enable automatic cloud synchronization
+   * **Job Hooks**: Configure pre-job and post-job automation scripts
 
 Understanding Cron Expressions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -195,6 +196,142 @@ Common cron patterns:
    30 1 * * 1-5  # Weekdays at 1:30 AM
 
 The interface shows human-readable descriptions of cron expressions.
+
+Job Hooks System
+~~~~~~~~~~~~~~~~~
+
+Job hooks allow you to execute custom commands before and after backup jobs, enabling powerful automation workflows.
+
+**Hook Types**
+
+* **Pre-Job Hooks**: Execute before the backup process begins
+  
+  * Ideal for database dumps, stopping services, mounting drives
+  * Can be marked as "Critical" to stop the job if they fail
+  * Prepare systems for consistent backups
+
+* **Post-Job Hooks**: Execute after the backup process completes
+  
+  * Perfect for cleanup, service restarts, health checks
+  * Can be configured to run even if the job fails
+  * Restore system state and send notifications
+
+**Adding Hooks to a Schedule**
+
+1. **Open Hooks Configuration**
+   
+   * In the schedule creation/editing form, click "Configure Hooks"
+   * This opens the hooks configuration modal
+
+2. **Configure Pre-Job Hooks**
+   
+   .. code-block:: text
+   
+      Name: Database Dump
+      Command: pg_dump myapp > /tmp/myapp_backup.sql
+      Critical: ✓ Enabled
+      
+      Name: Stop Web Service  
+      Command: systemctl stop nginx && sleep 5
+      Critical: ✓ Enabled
+
+3. **Configure Post-Job Hooks**
+   
+   .. code-block:: text
+   
+      Name: Restart Services
+      Command: systemctl start nginx && systemctl start mysql
+      Run Even If Job Failed: ✓ Enabled
+      
+      Name: Health Check Ping
+      Command: curl -X POST https://healthcheck.io/ping/abc123
+      Run Even If Job Failed: ✓ Enabled
+
+**Hook Options**
+
+* **Critical Hooks**: Job fails immediately if a critical hook fails
+  
+  * Use for essential preparation tasks (database dumps, prerequisites)
+  * Prevents inconsistent backups when preparation fails
+
+* **Run on Job Failure** (Post-hooks only): Hook executes even if backup fails
+  
+  * Use for cleanup, service restarts, monitoring pings
+  * Ensures system recovery regardless of backup success
+
+**Hook Execution Flow**
+
+Normal execution (all successful):
+
+.. code-block:: text
+
+   1. Pre-Hook 1 (Database Dump)        → ✅ Success
+   2. Pre-Hook 2 (Stop Services)        → ✅ Success
+   3. Backup Task                        → ✅ Success
+   4. Prune Task                         → ✅ Success
+   5. Post-Hook 1 (Restart Services)    → ✅ Success
+   6. Post-Hook 2 (Health Check)        → ✅ Success
+   
+   Result: ✅ Job Completed Successfully
+
+Critical hook failure:
+
+.. code-block:: text
+
+   1. Pre-Hook 1 (Database Dump)        → ❌ Failed (Critical)
+   2. Pre-Hook 2 (Stop Services)        → ⏭️  Skipped
+   3. Backup Task                        → ⏭️  Skipped  
+   4. Prune Task                         → ⏭️  Skipped
+   5. Post-Hook 1 (Restart Services)    → ⏭️  Skipped
+   6. Post-Hook 2 (Health Check)        → ✅ Success (Run on Failure)
+   
+   Result: ❌ Job Failed - Critical Hook Error
+
+**Environment Variables**
+
+Hook scripts automatically receive job context:
+
+.. code-block:: bash
+
+   # Available in all hook scripts
+   BORGITORY_REPOSITORY_ID="123"     # Repository being backed up
+   BORGITORY_TASK_INDEX="2"          # Hook position in job sequence
+   BORGITORY_JOB_TYPE="scheduled"    # Job type (scheduled, manual)
+
+**Common Hook Examples**
+
+Database Preparation:
+
+.. code-block:: bash
+
+   # Pre-hook: Create PostgreSQL dump
+   #!/bin/bash
+   pg_dump -h localhost -U backup_user myapp > /tmp/db_backup.sql
+   if [ $? -ne 0 ]; then
+       echo "Database dump failed"
+       exit 1
+   fi
+
+Service Management:
+
+.. code-block:: bash
+
+   # Post-hook: Restart services (always run)
+   #!/bin/bash
+   systemctl start nginx
+   systemctl start mysql
+   echo "Services restarted"
+
+Health Monitoring:
+
+.. code-block:: bash
+
+   # Post-hook: Send health check ping
+   #!/bin/bash
+   curl -X POST "https://healthcheck.io/ping/your-uuid" \
+        -d "Backup completed for repo ${BORGITORY_REPOSITORY_ID}"
+
+For comprehensive hook documentation, examples, and troubleshooting, see :doc:`how-to/job-hooks-system`.
 
 Managing Schedules
 ~~~~~~~~~~~~~~~~~~
