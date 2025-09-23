@@ -167,7 +167,9 @@ Schedule Management
      "enabled": true,
      "compression": "lz4",
      "pruning_policy_id": 1,
-     "cloud_sync_config_id": 1
+     "cloud_sync_config_id": 1,
+     "pre_job_hooks": "[{\"name\":\"Database Dump\",\"command\":\"pg_dump myapp > /tmp/dump.sql\",\"critical\":true}]",
+     "post_job_hooks": "[{\"name\":\"Cleanup\",\"command\":\"rm /tmp/dump.sql\",\"run_on_job_failure\":true}]"
    }
 
 **Update Schedule**

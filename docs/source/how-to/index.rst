@@ -18,6 +18,7 @@ These guides provide step-by-step instructions for specific tasks and common sce
    automated-backup-workflows
    backup-strategies
    exclude-patterns
+   job-hooks-system
 
 .. toctree::
    :maxdepth: 1

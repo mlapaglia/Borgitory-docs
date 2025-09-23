@@ -137,6 +137,10 @@ Step 5: Create Automated Schedule
         Notify on Success: ✓
         Notify on Failure: ✓
         Notify on Warning: ✓
+        
+        Job Hooks:
+        Pre-Job Hooks: Database dump preparation
+        Post-Job Hooks: Cleanup and health checks
 
 2. **Save and Test**
    
