@@ -139,8 +139,8 @@ Step 5: Create Automated Schedule
         Notify on Warning: ✓
         
         Job Hooks:
-        Pre-Job Hooks: Database dump preparation
-        Post-Job Hooks: Cleanup and health checks
+        Pre-Job Hooks: Database dump preparation (install postgresql-client via Package Manager)
+        Post-Job Hooks: Cleanup and health checks (install curl via Package Manager)
 
 2. **Save and Test**
    

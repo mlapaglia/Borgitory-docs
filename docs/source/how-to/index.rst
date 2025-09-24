@@ -44,6 +44,7 @@ These guides provide step-by-step instructions for specific tasks and common sce
    custom-compression-settings
    network-storage-integration
    docker-deployment-guide
+   package-manager
 
 Quick Reference
 ---------------
@@ -56,6 +57,7 @@ Common Tasks
 * :doc:`setup-aws-s3` - Configuring Amazon S3 for cloud backups
 * :doc:`setup-pushover-notifications` - Getting alerts on your mobile device
 * :doc:`docker-deployment-guide` - Production Docker deployment
+* :doc:`package-manager` - Installing tools for pre/post hooks
 
 Troubleshooting
 ~~~~~~~~~~~~~~~

@@ -180,7 +180,7 @@ Creating Backup Schedules
    * **Pruning Policy**: Attach retention policy
    * **Notifications**: Configure success/failure alerts
    * **Cloud Sync**: Enable automatic cloud synchronization
-   * **Job Hooks**: Configure pre-job and post-job automation scripts
+   * **Job Hooks**: Configure pre-job and post-job automation scripts (see :doc:`how-to/package-manager` for installing required tools)
 
 Understanding Cron Expressions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -305,6 +305,7 @@ Database Preparation:
 .. code-block:: bash
 
    # Pre-hook: Create PostgreSQL dump
+   # Requires: postgresql-client package (install via Package Manager)
    #!/bin/bash
    pg_dump -h localhost -U backup_user myapp > /tmp/db_backup.sql
    if [ $? -ne 0 ]; then
@@ -327,6 +328,7 @@ Health Monitoring:
 .. code-block:: bash
 
    # Post-hook: Send health check ping
+   # Requires: curl package (install via Package Manager)
    #!/bin/bash
    curl -X POST "https://healthcheck.io/ping/your-uuid" \
         -d "Backup completed for repo ${BORGITORY_REPOSITORY_ID}"
