@@ -13,6 +13,10 @@ The Job Hooks System allows you to execute custom commands before and after back
 - Send custom notifications or alerts
 - Integrate with external monitoring systems
 
+.. note::
+   Many hook scripts require additional command-line tools (like ``curl``, ``jq``, ``postgresql-client``, etc.). 
+   Use the :doc:`package-manager` to install these tools directly from the Borgitory interface.
+
 Hook Types
 ===========
 
