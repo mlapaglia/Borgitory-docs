@@ -215,7 +215,7 @@ Create multiple schedules with different frequencies:
    Cron: 0 3 * * * (daily at 3 AM)
    Archive Name: system-config-{now:%Y%m%d}
    Compression: lzma (high compression for config files)
-   Exclude Patterns:
+   Patterns: (see :doc:`backup-patterns` for syntax details)
    - /etc/shadow-
    - /etc/passwd-
    - *.tmp
@@ -230,7 +230,7 @@ Create multiple schedules with different frequencies:
    Cron: 0 1 * * * (daily at 1 AM)
    Archive Name: userdata-{now:%Y%m%d}
    Compression: lz4 (fast compression for large files)
-   Exclude Patterns:
+   Patterns: (see :doc:`backup-patterns` for syntax details)
    - .cache/
    - .tmp/
    - Downloads/
