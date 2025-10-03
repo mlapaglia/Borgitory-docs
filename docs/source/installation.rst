@@ -26,6 +26,9 @@ System Requirements
 
    **Windows Users:** For full functionality including archive browsing, Docker installation 
    is strongly recommended as FUSE (required for archive browsing) is not available on Windows.
+   
+   Alternatively, you can use WSL2 (Windows Subsystem for Linux) to run Borgitory natively.
+   See the :doc:`how-to/windows-wsl-setup` guide for complete WSL2 setup instructions.
 
 Installation Methods
 --------------------
@@ -219,6 +222,11 @@ BorgBackup Installation
 **Windows:**
 
 Download from the `BorgBackup releases page <https://github.com/borgbackup/borg/releases>`_
+
+.. note::
+
+   For Windows users who want full functionality including FUSE-based archive browsing,
+   we recommend using WSL2. See :doc:`how-to/windows-wsl-setup` for a complete setup guide.
 
 Rclone Installation (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

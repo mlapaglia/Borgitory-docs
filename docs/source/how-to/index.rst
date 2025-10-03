@@ -39,11 +39,17 @@ These guides provide step-by-step instructions for specific tasks and common sce
 
 .. toctree::
    :maxdepth: 1
+   :caption: Installation & Setup
+
+   windows-wsl-setup
+   docker-deployment-guide
+
+.. toctree::
+   :maxdepth: 1
    :caption: Advanced Configuration
 
    custom-compression-settings
    network-storage-integration
-   docker-deployment-guide
    package-manager
 
 Quick Reference
@@ -52,11 +58,12 @@ Quick Reference
 Common Tasks
 ~~~~~~~~~~~~
 
+* :doc:`windows-wsl-setup` - Complete Windows setup using WSL2
+* :doc:`docker-deployment-guide` - Production Docker deployment
 * :doc:`setup-multiple-repositories` - Managing multiple backup destinations
 * :doc:`automated-backup-workflows` - Setting up comprehensive backup automation
 * :doc:`setup-aws-s3` - Configuring Amazon S3 for cloud backups
 * :doc:`setup-pushover-notifications` - Getting alerts on your mobile device
-* :doc:`docker-deployment-guide` - Production Docker deployment
 * :doc:`package-manager` - Installing tools for pre/post hooks
 
 Troubleshooting
