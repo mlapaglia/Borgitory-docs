@@ -36,7 +36,7 @@ Manual Backup Operations
    * Flexible source path selection with path validation
    * Multiple compression algorithms (lz4, zlib, lzma, zstd)
    * Custom archive naming with timestamp support
-   * Exclude patterns and file filtering
+   * Advanced include/exclude patterns with multiple styles (see :doc:`how-to/backup-patterns`)
 
 **Real-Time Progress Monitoring**
    * Live backup progress with detailed statistics

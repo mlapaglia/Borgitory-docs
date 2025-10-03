@@ -114,7 +114,7 @@ Manual Backup
 
 3. **Advanced Options** (Optional)
    
-   * **Exclude Patterns**: File patterns to exclude from backup
+   * **Include/Exclude Patterns**: File patterns to include/exclude from backup (see :doc:`how-to/backup-patterns` for detailed guide)
    * **One File System**: Don't cross filesystem boundaries
    * **Numeric Owner**: Store numeric user/group IDs
    * **Checkpoint Interval**: Create checkpoints every N seconds

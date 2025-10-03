@@ -15,6 +15,7 @@ These guides provide step-by-step instructions for specific tasks and common sce
    :maxdepth: 1
    :caption: Backup Operations
 
+   backup-patterns
    automated-backup-workflows
    backup-strategies
    exclude-patterns
@@ -58,6 +59,7 @@ Quick Reference
 Common Tasks
 ~~~~~~~~~~~~
 
+* :doc:`backup-patterns` - Configure include/exclude patterns for backups
 * :doc:`windows-wsl-setup` - Complete Windows setup using WSL2
 * :doc:`docker-deployment-guide` - Production Docker deployment
 * :doc:`setup-multiple-repositories` - Managing multiple backup destinations
