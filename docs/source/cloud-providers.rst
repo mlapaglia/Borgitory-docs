@@ -53,6 +53,7 @@ This file contains three things: the config class, the storage class, and the pr
 **Configuration class** -- extends ``CloudStorageConfig`` with provider-specific fields and validators:
 
 .. code-block:: python
+   :force:
 
    import asyncio
    from typing import AsyncGenerator, Callable, Dict, List, Optional, cast
@@ -93,6 +94,7 @@ This file contains three things: the config class, the storage class, and the pr
 **Storage class** -- implements all abstract methods from ``CloudStorage`` and contains the rclone integration:
 
 .. code-block:: python
+   :force:
 
    class {ProviderName}Storage(CloudStorage):
        """
@@ -346,6 +348,7 @@ This file contains three things: the config class, the storage class, and the pr
 **Provider registration** -- at the bottom of the same file, add the ``@register_provider`` decorator:
 
 .. code-block:: python
+   :force:
 
    @register_provider(
        name="{provider_name}",
@@ -406,6 +409,7 @@ Create ``src/borgitory/templates/partials/cloud_sync/providers/{provider_name}/{
 Templates must support both **create** and **edit** mode. Use ``{% if config %}`` to populate fields from existing config during edits. For sensitive fields, show a "leave empty to keep current" hint in edit mode.
 
 .. code-block:: html
+   :force:
 
    <!-- {Provider Name} Fields -->
    <div id="{provider_name}-fields" class="space-y-4">
